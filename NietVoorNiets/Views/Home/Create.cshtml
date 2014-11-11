@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+<script type="text/javascript">
+    function nieuweKlas() {
+        var Name = document.getElementById('klasId').value;
+
+        Parse.initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "225C2xK4PLFjcBx86zyHxEsgAYFaLRAsfrXy7V1j");
+        var Klas = Parse.Object.extend("Klas");
+        var klas = new Klas();
+        klas.save({ Klasnaam: Name });
+    }
+</script>
+
+<form method="post">
+    <input type="text" id="klasId" placeholder="Klas naam" name="KlasNaam" />
+    <input type="submit" value="Go!" onclick="nieuweKlas()" />
+</form>
