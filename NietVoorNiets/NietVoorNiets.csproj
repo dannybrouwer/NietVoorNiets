@@ -129,7 +129,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Views\Account\createUser.cshtml" />
+    <Content Include="Views\Home\createUser.cshtml" />
     <Content Include="Views\Account\Push.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">

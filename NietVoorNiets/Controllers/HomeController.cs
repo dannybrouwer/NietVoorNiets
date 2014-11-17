@@ -21,5 +21,23 @@ namespace NietVoorNiets.Controllers
             ViewBag.Message = klassen;
             return View();
         }
+
+        [HttpPost]
+        public async Task<ActionResult> createUser(string firstName, string email, string password)
+        {
+            var user = new ParseUser()
+            {
+                Username = firstName,
+                Password = password,
+                Email = email
+            };
+
+            await user.SignUpAsync();
+            return View();
+        }
+        public ActionResult createUser()
+        {
+            return View();
+        }
     }
 }

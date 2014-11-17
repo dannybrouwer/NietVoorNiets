@@ -3,15 +3,28 @@
     ViewBag.Title = "Push";
 }
 
+<script type="text/javascript">
+    function savePush() {
+        var Message = document.getElementById('message').value;
+        var Klas = document.getElementById('klas').value;
+
+        Parse.initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "225C2xK4PLFjcBx86zyHxEsgAYFaLRAsfrXy7V1j");
+        var Push = Parse.Object.extend("Push");
+        var push = new Push();
+        push.save({ Pushnotification: Message }),
+        push.save({ Klasnaam: Klas });
+    }
+</script>
+
 <h2>Send pushnotification</h2>
 
 <form method="post">
-    <input type="text" name="message" />
-    <input type="submit" />
+    <input id="message" type="text" name="message" />
     <select name="klasnaam">
         @foreach (var klas in ViewBag.Message)
         {
-            <option value="@klas["Klasnaam"]">@klas["Klasnaam"]</option>
+            <option id="klas" value="@klas["Klasnaam"]">@klas["Klasnaam"]</option>
         }
     </select>
+    <input type="submit" onclick="savePush()"/>
 </form>

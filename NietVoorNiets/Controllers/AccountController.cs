@@ -64,39 +64,7 @@ namespace NietVoorNiets.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> createUser(string firstName, string email, string password)
-        {
-             var user = new ParseUser()
-             {
-                 Username = firstName,
-                 Password = password,
-                 Email = email
-             };
-            
-             await user.SignUpAsync();
-             return View();
-        }   
-        public ActionResult createUser()
-        {
-            if (Session["loggedin"] != null)
-            {
-                if (Session["loggedin"].ToString() == "True")
-                {
-                    return View();
-                }
-                else
-                {
-                    return RedirectToAction("Login");
-                }
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
-        }
-
-        [HttpPost]
-        public ActionResult Push(string message, string klasnaam)
+        public async Task<ActionResult>Push(string message, string klasnaam)
         {
             bool isPushMessageSend = false;
             string postString = "";
@@ -110,6 +78,7 @@ namespace NietVoorNiets.Controllers
             httpWebRequest.Headers.Add("X-Parse-Application-Id", "QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa");
             httpWebRequest.Headers.Add("X-Parse-REST-API-KEY", "QkXb7wOPqOt1P21M58xb3ODS2LlaXdTiDXmG2E8g");
             httpWebRequest.Method = "POST";
+
             StreamWriter requestWriter = new StreamWriter(httpWebRequest.GetRequestStream());
             requestWriter.Write(postString);
             requestWriter.Close();
@@ -123,7 +92,12 @@ namespace NietVoorNiets.Controllers
                     isPushMessageSend = true;
                 }
             }
-            return RedirectToAction("Index", "Home");
+
+            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+            var pushes = await query.FindAsync();
+
+            return RedirectToAction("Push", "Account");
         }
         public async Task<ActionResult> Push()
         {
@@ -135,6 +109,7 @@ namespace NietVoorNiets.Controllers
                     ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
                     var klassen = await query.FindAsync();
                     ViewBag.Message = klassen;
+
                     return View();
                 }
                 else
