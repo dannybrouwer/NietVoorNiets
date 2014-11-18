@@ -24,6 +24,7 @@ namespace NietVoorNiets.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(string username, string password)
         {
+            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
             try
             {
                 await ParseUser.LogInAsync(username, password);
