@@ -133,6 +133,7 @@
     <Content Include="Views\Account\Push.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\EditClassname.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
