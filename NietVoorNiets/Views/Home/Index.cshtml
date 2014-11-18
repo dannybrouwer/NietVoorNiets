@@ -1,10 +1,23 @@
 ﻿
-<h1>Klassen</h1>
-<table>
-    @foreach (var klas in ViewBag.Message)
-    {
-        <tr>
-            <td>@klas["Klasnaam"]</td>
-        </tr>
-    }
-</table>
+<div class="form">
+    <h1 class="message">Klassen</h1>
+    <table cellpadding="10" class="tabel" width="250">
+        @foreach (var klas in ViewBag.Message)
+        {
+            <tr>
+                <td><a href="../../Account/push">@klas["Klasnaam"]</a></td>
+            </tr>
+        }
+    </table>
+
+    <div class="form-option">
+        <table cellpadding="7" class="tabel-option" width="600" style="table-layout: fixed">
+            <tr>
+                <td><a href="#">Bewerken</a></td>
+                <td><a href="#">Maak een bericht</a></td>
+                <td><a href="#">Afmelden</a></td>
+            </tr>
+        </table>
+
+    </div>
+</div>

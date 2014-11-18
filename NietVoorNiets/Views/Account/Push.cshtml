@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Push";
 }
 
@@ -15,16 +14,26 @@
         push.save({ Klasnaam: Klas });
     }
 </script>
+<div class="form">
+    <h1 class="message">Verstuur een notificatie</h1>
 
-<h1>Verstuur een notificatie</h1>
+    <form method="post">
+        
+        
+            <label>Klas</label>
+       
+            <select name="klasnaam">
+                @foreach (var klas in ViewBag.Message)
+                {
+                    <option id="klas" value="@klas["Klasnaam"]">@klas["Klasnaam"]</option>
+                }
+            </select>
+       <br />
+        <label>Bericht</label>
+        <textarea id="message" placeholder="Voer hier uw bericht in" name="message"></textarea><br />
+        <input type="submit" onclick="savePush()" class="pure-button pure-button-primary" style="float:right" />
+    </form>
+</div>
 
-<form method="post">
-    <input id="message" type="text" name="message" />
-    <select name="klasnaam">
-        @foreach (var klas in ViewBag.Message)
-        {
-            <option id="klas" value="@klas["Klasnaam"]">@klas["Klasnaam"]</option>
-        }
-    </select>
-    <input type="submit" onclick="savePush()"/>
-</form>
+
+

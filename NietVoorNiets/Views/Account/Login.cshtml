@@ -1,13 +1,16 @@
-﻿<h1>Inloggen</h1>
+﻿
+<div class="form">
+    <h1 class="message">Inloggen</h1>
 
-<form method="post">
-    <p>
-        <label>Username</label>
-        <input type="text" name="username"/>
-    </p>
-    <p>
-        <label>Password</label>
-        <input type="password" name="password" />
-    </p>
-    <input type="submit"/>
-</form>
+    <form method="post" class="pure-form-aligned">
+        <div class="pure-control-group">
+            <label>Username</label>
+            <input type="text" name="username" />
+        </div>
+        <div class="pure-control-group">
+            <label>Password</label>
+            <input type="password" name="password" />            
+        </div>
+        <input type="submit" class="pure-button pure-button-primary" value="login" style="float:right" />
+    </form>
+</div>
