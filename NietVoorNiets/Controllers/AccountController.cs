@@ -37,30 +37,20 @@ namespace NietVoorNiets.Controllers
             {
                 login = false;
                 return View();
-                // The login failed. Check the error to see why.
+                // The login failed
             }
         }
         
         public async Task<ActionResult> Create()
         {
-            if (Session["loggedin"] != null)
+            if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
             {
-                if (Session["loggedin"].ToString() == "True")
-                {
                     ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
                     ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
                     var klassen = await query.FindAsync();
                     return View();
-                }
-                else
-                {
-                    return RedirectToAction("Login");
-                }
             }
-            else
-            {
-                return RedirectToAction("Login");
-            }
+            return RedirectToAction("Login");
         }
 
         [HttpPost]
@@ -101,26 +91,16 @@ namespace NietVoorNiets.Controllers
         }
         public async Task<ActionResult> Push()
         {
-            if (Session["loggedin"] != null)
+            if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
             {
-                if (Session["loggedin"].ToString() == "True")
-                {
-                    ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
-                    ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
-                    var klassen = await query.FindAsync();
-                    ViewBag.Message = klassen;
+                ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
+                ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+                var klassen = await query.FindAsync();
+                ViewBag.Message = klassen;
 
-                    return View();
-                }
-                else
-                {
-                    return RedirectToAction("Login");
-                }
+                return View();
             }
-            else
-            {
-                return RedirectToAction("Login");
-            }
+            return RedirectToAction("Login");
         }
 
         public async Task<ActionResult> Edit()
@@ -129,9 +109,6 @@ namespace NietVoorNiets.Controllers
             ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
             var klassen = await query.FindAsync();
             ViewBag.Message = klassen;
-
-
-            
             return View();
         }
     }
