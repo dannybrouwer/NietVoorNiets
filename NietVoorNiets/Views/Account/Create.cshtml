@@ -12,8 +12,12 @@
         klas.save({ Klasnaam: Name });
     }
 </script>
-<h1>Klas toevoegen</h1>
-<form method="post">
-    <input type="text" id="klasId" placeholder="Klas naam" name="KlasNaam" />
-    <input type="submit" value="Toevoegen" onclick="nieuweKlas()" />
-</form>
+
+<div class="form">
+    <h2 class="message">Klas toevoegen</h2>
+    <form method="post">
+        <label>Klas</label>
+        <input type="text" id="klasId" placeholder="Klas naam" name="KlasNaam" /><br />
+        <input type="submit" value="Toevoegen" onclick="nieuweKlas()" class="pure-button pure-button-primary" style="float:right"/>
+    </form>
+</div>
