@@ -1,19 +1,27 @@
-﻿<h2>Register</h2>
+﻿<h1>Register</h1>
 
 <form method="post">
-    <p>
-        <label>First name: </label>
-        <input type="text" name="firstName" />
-    </p>
-    <p>
-        <label>E-mail: </label>
-        <input type="email" name="email" />
-    </p>
-    <p>
-        <label>Password</label>
-        <input type="password" name="password" />
-    </p>
-    <a href="index">
-        <input type="submit" />
-    </a>
+    <div class="createuserform">
+        <div class="register">
+            <p>
+                <label>First name: </label>
+                <input class="userinput" type="text" name="firstName" />
+            </p>
+        </div>
+        <div class="register">
+            <p>
+                <label>E-mail: </label>
+                <input class="userinput" type="email" name="email" />
+            </p>
+        </div>
+        <div class="register">
+            <p>
+                <label>Password</label>
+                <input class="userinput" type="password" name="password" />
+            </p>
+        </div>
+        <a href="index">
+            <input style="float:right; margin-top:5px;" type="submit" />
+        </a>
+    </div>
 </form>
