@@ -142,6 +142,7 @@ table{border-collapse:collapse;border-spacing:0}
   		top: 20%;
   		left: 50%;
   		transform: translate(-50%, -50%);
+          margin-top:-280px;
 		}
 
 		.text{
@@ -281,6 +282,7 @@ table{
   		top: 20%;
   		left: 50%;
   		transform: translate(-50%, -50%);
+          margin-top:-280px;
 		}
 .form{
 			position: fixed;
@@ -648,6 +650,7 @@ table{
   		top: 20%;
   		left: 50%;
   		transform: translate(-50%, -50%);
+          margin-top:-280px;
 		}
 
 		.text{
