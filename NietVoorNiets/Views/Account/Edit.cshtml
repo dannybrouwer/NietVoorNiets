@@ -1,16 +1,33 @@
 ﻿@{
     ViewBag.Title = "Edit";
-}
+
+    System.Collections.ArrayList listOfKlassNames = ViewBag.KlasName;
+
+    int amountOfNames = 0;
+    
+    }
 
 <h1>Kies een klas</h1>
 <table>
-        @foreach (var klas in ViewBag.Message)
-        {
-            <tr>
-                <td>@klas["Klasnaam"]</td>
-            </tr>
-        }
+
+
+
+    @foreach (var klas in ViewBag.Message)
+    {
+
+        String id = listOfKlassNames[amountOfNames].ToString();
+        
+        <tr>
+            <td><a href="../../Account/EditClassname?klasName=@id">@klas["Klasnaam"]</a></td>
+        </tr>
+        amountOfNames++;
+    }
+
+   
 </table>
+
+
+
 <form action="~/Account/Create">
     <input type="submit" value="Voeg een klas toe"/>
 </form>

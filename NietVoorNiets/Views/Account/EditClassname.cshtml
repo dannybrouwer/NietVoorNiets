@@ -3,7 +3,19 @@
     ViewBag.Title = "EditClassname";
 }
 
-<h2>Weizig klasnaam</h2>
+<h2>Wijzig klasnaam</h2>
+<form method="post">
+    <p>
+        <label>Klas: </label>
 
+        <input value="@ViewBag.KlasName" name="newKlasNaam" required/>
+        <input type="submit" value="Opslaan" />
+    </p>
+</form>
 
-
+<form method="post">
+    <p>
+        <input type="hidden" value="@ViewBag.KlasName" name="oldKlasNaam" />
+        <input type="submit" value="Delete" />
+    </p>
+</form>

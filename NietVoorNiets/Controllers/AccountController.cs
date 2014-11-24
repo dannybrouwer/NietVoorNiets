@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Parse;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace NietVoorNiets.Controllers
 
                 login = true;
                 Session["loggedin"] = login.ToString();
-                return RedirectToAction("Create");
+                return RedirectToAction("Index","Home");
                 // Login was successful.
             }
             catch (Exception e)
@@ -107,10 +108,58 @@ namespace NietVoorNiets.Controllers
         {
             ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
             ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
-            var klassen = await query.FindAsync();
-            ViewBag.Message = klassen;
             
+            var klassen = await query.FindAsync();
+
+            ArrayList ListOfClassIds = new ArrayList();
+            ArrayList ListOfClassNames = new ArrayList();
+
+            foreach (var klas in klassen)
+            {
+                ParseObject currentKlas = klas;
+                String CurrentObjectId = currentKlas.ObjectId;
+                String CurrentKlasName = currentKlas.Get<string>("Klasnaam"); ;
+
+                ListOfClassIds.Add(CurrentObjectId);
+                ListOfClassNames.Add(CurrentKlasName);
+
+                ViewBag.KlasName = ListOfClassNames;
+                ViewBag.KlasId = ListOfClassIds;
+            }
+
+            ViewBag.Message = klassen;
             return View();
+        }
+        public async Task<ActionResult> EditClassname()
+        {
+            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
+            String KlasName = Request.QueryString["klasName"];
+            ViewBag.KlasName = KlasName;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditClassname(string newKlasNaam, string oldKlasNaam)
+        {
+
+            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
+
+            String KlasName = Request.QueryString["klasName"];
+            var query = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", KlasName);
+            ParseObject klas = await query.FirstAsync();
+
+            if (oldKlasNaam != null)
+            {
+                await klas.DeleteAsync();
+            }
+            else if (newKlasNaam != null)
+            {
+                klas["Klasnaam"] = newKlasNaam;
+                await klas.SaveAsync();
+                ViewBag.KlasName = KlasName;
+            }
+            
+            return RedirectToAction("Edit");
         }
     }
 }
