@@ -9,12 +9,8 @@
 
 <h1>Kies een klas</h1>
 <table>
-
-
-
     @foreach (var klas in ViewBag.Message)
     {
-
         String id = listOfKlassNames[amountOfNames].ToString();
         
         <tr>
@@ -22,11 +18,7 @@
         </tr>
         amountOfNames++;
     }
-
-   
 </table>
-
-
 
 <form action="~/Account/Create">
     <input type="submit" value="Voeg een klas toe"/>

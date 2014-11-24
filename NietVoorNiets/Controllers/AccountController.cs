@@ -156,9 +156,9 @@ namespace NietVoorNiets.Controllers
             {
                 klas["Klasnaam"] = newKlasNaam;
                 await klas.SaveAsync();
-                ViewBag.KlasName = KlasName;
             }
-            
+
+            ViewBag.KlasName = KlasName;
             return RedirectToAction("Edit");
         }
     }
