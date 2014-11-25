@@ -11,6 +11,10 @@
         var klas = new Klas();
         klas.save({ Klasnaam: Name });
     }
+
+    function goBack() {
+        window.location.href("./account/edit")
+    }
 </script>
 
 <div class="form">
@@ -19,5 +23,6 @@
         <label>Klas</label>
         <input type="text" id="klasId" placeholder="Klas naam" name="KlasNaam" /><br />
         <input type="submit" value="Toevoegen" onclick="nieuweKlas()" class="pure-button pure-button-primary" style="float:right"/>
-    </form>
+      </form>
+    <a href="./edit"><input type="submit" value="Terug" class="pure-button pure-button-primary" style="float:left" /></a>
 </div>

@@ -735,11 +735,13 @@ table{
 
 		.tabel-option{
 
-			background-color: #349383;
-            
+			background-color: #349383;            
 		}
 
-       
+      
+       .main-ul{
+           background-color: red;
+       }
 
 		a{
 			color: white;
@@ -752,6 +754,54 @@ table{
 			border-radius: 5px;
 		}
 
+          ul {
+            width: 30em; /* room for 3 columns */
+            align-items:center;
+           
+           
+        }
+
+            ul li{
+                float: left;
+                width: 9em; /* accommodate the widest item */
+                
+                              
+            }
+            li{
+               list-style:none;
+                background-color: #8BCB97;
+                text-align: center;
+                width:200px;
+                margin:2px;
+                padding: 5px;
+                
+            }
+
+            .lijst{
+                margin-top: 10%;
+            }
+            .lijst-one ul li{
+                background-color: #349383;
+                width: 275px;;
+            }
+            .lijst-one-index ul li{
+                background-color: #349383;
+                width: 180px;
+            }
+
+            .tabel-option ul{
+                width: 250px;
+                
+            }
+
+            ul#menu li{
+                width: 579px;
+                height: 40px;
+                padding:initial;
+                padding-top:10px;
+                
+            }
+           
      
 
 

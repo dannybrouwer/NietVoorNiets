@@ -7,19 +7,42 @@
     
     }
 
-<h1>Kies een klas</h1>
-<table>
-    @foreach (var klas in ViewBag.Message)
-    {
-        String id = listOfKlassNames[amountOfNames].ToString();
-        
-        <tr>
-            <td><a href="../../Account/EditClassname?klasName=@id">@klas["Klasnaam"]</a></td>
-        </tr>
-        amountOfNames++;
-    }
-</table>
+<div class="form">
+    
+    <h2 class="message">Kies een klas om te bewerken</h2>
+   
+    <div class="lijst-one">
+        <ul>
+            <li><a href="~/Account/Create">Voeg nieuwe klas toe</a></li>
+            <li><a href="~/home/index">Terug</a></li>
+        </ul>
+        <br />
+    </div>
 
-<form action="~/Account/Create">
-    <input type="submit" value="Voeg een klas toe"/>
-</form>
+    
+
+        @foreach (var klas in ViewBag.Message)
+{
+    String id = listOfKlassNames[amountOfNames].ToString();
+    
+        <div class="lijst">
+
+            <ul>
+                <li><a href="../../Account/EditClassname?klasName=@id">@klas["Klasnaam"]</a></li>
+            </ul>
+        </div>
+   
+    amountOfNames++;
+        }
+    
+   
+</div>
+    
+ 
+    
+
+
+
+   
+
+

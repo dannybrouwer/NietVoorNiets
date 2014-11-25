@@ -3,19 +3,16 @@
     ViewBag.Title = "EditClassname";
 }
 
-<h2>Wijzig klasnaam</h2>
-<form method="post">
-    <p>
-        <label>Klas: </label>
-
-        <input value="@ViewBag.KlasName" name="newKlasNaam" required/>
-        <input type="submit" value="Opslaan" />
-    </p>
-</form>
-
-<form method="post">
-    <p>
-        <input type="hidden" value="@ViewBag.KlasName" name="oldKlasNaam" />
-        <input type="submit" value="Delete" />
-    </p>
-</form>
+<div class="form">
+    <h2 class="message">Klas bewerken</h2>
+    <form method="post">
+        <label>Klas</label>
+        <input type="text" placeholder="@ViewBag.KlasName"value="@ViewBag.KlasName" name="newKlasNaam" required /><br />
+        <input type="submit" value="Opslaan" class="pure-button pure-button-primary" style="float:right" />
+    </form>
+    <form method="post">
+        <input type="hidden" class="pure-button pure-button-primary" value="@ViewBag.KlasName" name="oldKlasNaam" />        
+        <input type="submit" value="Verwijderen" class="pure-button pure-button-primary" style="float:left" />
+    </form>
+    <a href="./edit"><input type="submit" value="Terug" class="pure-button pure-button-primary" style="margin-left:25px" /></a>
+</div>
