@@ -86,8 +86,11 @@ namespace NietVoorNiets.Controllers
             }
 
             ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
-            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
-            var pushes = await query.FindAsync();
+
+            ParseObject pushObject = new ParseObject("Push");
+            pushObject["Pushnotification"] = message;
+            pushObject["Klasnaam"] = klasnaam;
+            await pushObject.SaveAsync();
 
             return RedirectToAction("Push", "Account");
         }
