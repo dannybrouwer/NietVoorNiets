@@ -165,7 +165,7 @@ table{border-collapse:collapse;border-spacing:0}
 		}
 
         .form {
-            position: fixed;
+           
             top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -285,7 +285,7 @@ table{
           margin-top:-280px;
 		}
 .form{
-			position: fixed;
+			
   				top: 45%;
   				left: 50%;
   				transform: translate(-50%, -50%);
@@ -503,7 +503,7 @@ table{
   		transform: translate(-50%, -50%);
 		}
 .form{
-			position: fixed;
+			
   				top: 45%;
   				left: 50%;
   				transform: translate(-50%, -50%);
@@ -522,11 +522,11 @@ table{
     	text-align: center; 
     }
 
-    table{
+    /*table{
 			background-color: #4FB08F;
 			border: 1px solid white;
 			color: white;
-			
+			    
 		}
 		table tr td{
 			border: 1px solid white;
@@ -544,7 +544,7 @@ table{
   		transform: translate(-50%, -50%);
 		}
 .form{
-			position: fixed;
+			
   				top: 45%;
   				left: 50%;
   				transform: translate(-50%, -50%);
@@ -553,7 +553,7 @@ table{
 				font-size: 20px;
 				margin-top: 60px;
 				text-align: left;				
-		}
+		}*/
 }
 
 @media screen and (min-width: 35.5em) {
@@ -565,8 +565,15 @@ table{
         width: 100%;
     }
 
-    .message{
+    /*.message{
     	text-align: center; 
+        
+    }
+    .message-change{
+        text-align: center;
+        margin-top: 450px;
+        margin-left: 200px;
+        position: absolute;
     }
 
     table{
@@ -589,18 +596,8 @@ table{
   		top: 20%;
   		left: 50%;
   		transform: translate(-50%, -50%);
-		}
-.form{
-			position: fixed;
-  				top: 45%;
-  				left: 50%;
-  				transform: translate(-50%, -50%);
-  				color:  #4FB08F;
-				font-family: verdana;
-				font-size: 20px;
-				margin-top: 60px;
-				text-align: left;				
-		}
+		}*/
+
 }
 
 @media screen and (min-width: 48em) {
@@ -675,19 +672,17 @@ table{
 		}
 
 		.form{
-			position: fixed;
-  				top: 45%;
-  				left: 50%;
+                margin-left: 700px;;
   				transform: translate(-50%, -50%);
   				color:  #4FB08F;
 				font-family: verdana;
 				font-size: 20px;
-				margin-top: 60px;
+				
 				text-align: left;				
 		}
 
 		.form-option{
-			position: fixed;
+			
   				top: 95%;
   				left: 50%;
   				transform: translate(-50%, -50%);
@@ -754,20 +749,18 @@ table{
 			border-radius: 5px;
 		}
 
-          ul {
-            width: 30em; /* room for 3 columns */
+          .lijst ul {
+            width: 30em; /*room for 3 columns */
             align-items:center;
-           
-           
-        }
+            }
 
-            ul li{
+             ul li{
                 float: left;
                 width: 9em; /* accommodate the widest item */
                 
                               
             }
-            li{
+           li{
                list-style:none;
                 background-color: #8BCB97;
                 text-align: center;
@@ -801,6 +794,19 @@ table{
                 padding-top:10px;
                 
             }
+
+             .message-change{
+                text-align: center;
+                margin-top: 550px;
+                margin-left: 200px;
+               
+            }
+
+             .tabel-change{
+                 overflow: 
+             }
+
+        
            
      
 

@@ -3,20 +3,35 @@
     ViewBag.Title = "ScheduleChanges";
 }
 
-<h2>Rooster wijzigingen</h2>
+<div class="form">
+    <h1 class="message-title">Rooster wijzigingen</h1>
 
-@*@foreach (var change in ViewBag.Changes)
-{
-    <div>
-        <ul>
-            <li>@change["Pushnotification"]</li>
-        </ul>
-    </div>
-}*@
+    <table cellpadding="10" width="500" class="tabel-change">
+        <thead>
+            <tr>
+                <th colspan="3" style="text-align:center; background-color:lightblue;">@ViewBag.Klas</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>                
+                <th>Datum</th>
+                <th colspan="3">Melding</th>
+            </tr>
+        </thead> 
+      
+    
+            @foreach (var change in ViewBag.Changes)
+            {
+                <tr> 
+                            
+                    <td>@change.CreatedAt</td>
+                    <td colspan="3">@change["Pushnotification"]</td>                    
+                </tr>
+            }
+        <tr>
+            <td colspan="3" style="background-color:lightblue"><a href="~/home/index">Terug</a></td>
+        </tr>
+        </table>
+        
+</div>
 
-@foreach (var change in ViewBag.Changes)
-{
-    <div>
-            <p>@change["Pushnotification"]</p>
-    </div>
-}
