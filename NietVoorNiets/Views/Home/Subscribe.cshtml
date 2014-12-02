@@ -1,10 +1,10 @@
 ﻿<script type="text/javascript">
     function Abonneer() {
-        // NOT YET WORKING
+        // NOT WORKING YET
         var email = document.getElementById('emailID').value;
 
         Parse.initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "225C2xK4PLFjcBx86zyHxEsgAYFaLRAsfrXy7V1j");
-        var Subscribe = Parse.Object.extend("Subscribe");
+        var Subscribe = Parse.Object.extend("Subscribers");
         var subscribe = new Subscribe();
         subscribe.save({ Email: email });
     }
@@ -14,7 +14,7 @@
 <p>Als je je aanmeld, krijg je de wijzigingen ook via de mail. Mooi he?! Speciaal voor jullie iPhone-gebruikers</p>
 
 <form method="post">
-    <p><label id="emailID">E-mail</label><input type="text" name="emailadres" /></p>
+    <p><label >E-mail</label><input id="emailID" type="text" name="emailadres" /></p>
     <p>
         <label>Klas</label>
         <select name="klasnaam" >
@@ -26,5 +26,3 @@
     </p>
     <input type="submit" value="Aanmelden" onclick="Abonneer()" />
 </form>
-
-
