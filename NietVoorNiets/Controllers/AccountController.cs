@@ -169,35 +169,38 @@ namespace NietVoorNiets.Controllers
             ViewBag.Message = klassen;
             return View();
         }
-        public async Task<ActionResult> EditClassname()
+        public ActionResult EditClassname(string klasName)
         {
-            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
-            String KlasName = Request.QueryString["klasName"];
-            ViewBag.KlasName = KlasName;
+            ViewBag.KlasName = klasName;
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditClassname(string newKlasNaam, string oldKlasNaam)
+        public async Task<ActionResult> EditClassname(ClassViewModel viewModel, string klasName)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
 
             ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
-
-            String KlasName = Request.QueryString["klasName"];
-            var query = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", KlasName);
+            var query = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", klasName);
             ParseObject klas = await query.FirstAsync();
 
-            if (oldKlasNaam != null)
-            {
-                await klas.DeleteAsync();
-            }
-            else if (newKlasNaam != null)
-            {
-                klas["Klasnaam"] = newKlasNaam;
-                await klas.SaveAsync();
-            }
+            klas["Klasnaam"] = viewModel.Name;
+            await klas.SaveAsync();
 
-            ViewBag.KlasName = KlasName;
+            return RedirectToAction("Edit");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(string klasName)
+        {
+            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
+            var query = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", klasName);
+            ParseObject klas = await query.FirstAsync();
+            await klas.DeleteAsync();
+
             return RedirectToAction("Edit");
         }
     }

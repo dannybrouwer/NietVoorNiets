@@ -1,4 +1,4 @@
-﻿
+﻿@model NietVoorNiets.ClassViewModel
 @{
     ViewBag.Title = "EditClassname";
 }
@@ -7,11 +7,11 @@
     <h2 class="message">Klas bewerken</h2>
     <form method="post">
         <label>Klas</label>
-        <input type="text" placeholder="@ViewBag.KlasName"value="@ViewBag.KlasName" name="newKlasNaam" required /><br />
+        @Html.TextBoxFor(m => m.Name, new { placeholder = ViewBag.KlasName })
         <input type="submit" value="Opslaan" class="pure-button pure-button-primary" style="float:right" />
     </form>
-    <form method="post">
-        <input type="hidden" class="pure-button pure-button-primary" value="@ViewBag.KlasName" name="oldKlasNaam" />        
+    <form method="post" action="@Url.Action("Delete")">
+        <input type="hidden" class="pure-button pure-button-primary" value="@ViewBag.KlasName" name="klasName" />        
         <input type="submit" value="Verwijderen" class="pure-button pure-button-primary" style="float:left" />
     </form>
     <a href="./edit"><input type="submit" value="Terug" class="pure-button pure-button-primary" style="margin-left:25px" /></a>
