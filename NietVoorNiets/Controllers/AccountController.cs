@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -32,7 +33,7 @@ namespace NietVoorNiets.Controllers
 
                 login = true;
                 Session["loggedin"] = login.ToString();
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("IndexDocent","Home");
                 // Login was successful.
             }
             catch (Exception e)
@@ -52,7 +53,7 @@ namespace NietVoorNiets.Controllers
                     var klassen = await query.FindAsync();
                     return View();
             }
-            return RedirectToAction("Login");
+            return RedirectToAction("IndexDocent", "Home");
         }
 
         [HttpPost]
@@ -91,6 +92,17 @@ namespace NietVoorNiets.Controllers
             pushObject["Pushnotification"] = message;
             pushObject["Klasnaam"] = klasnaam;
             await pushObject.SaveAsync();
+
+            //MAIL VERZENDEN
+            MailMessage mail = new MailMessage("dannybrouwertest@hotmail.com", "dannybrouwertest@mailinator.com");
+            SmtpClient client = new SmtpClient();
+            client.Port = 25;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Host = "localhost";
+            mail.Subject = "this is a test email.";
+            mail.Body = "this is my test email body";
+            client.Send(mail);
 
             return RedirectToAction("Push", "Account");
         }

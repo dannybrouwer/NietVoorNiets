@@ -2,24 +2,19 @@
 <div class="form">
     <h1 class="message">Klassen</h1>
 
-    <div class="lijst-one-index">
-        <ul>
-            <li><a href="../../Account/edit">Bewerken</a></li>
-            <li><a href="../../Account/push">Maak een bericht</a></li>
-            <li><a href="#">Afmelden</a></li>
-
-        </ul>
-        <br />
-    </div>
-   
         @foreach (var klas in ViewBag.Message)
         {
                       
              <div class="lijst">
                 <ul>
-                    <li><a href="../../Account/push">@klas["Klasnaam"]</a></li>
+                    <li><a href="../../Home/ScheduleChanges?id=@klas["Klasnaam"]">@klas["Klasnaam"]</a></li>
                 </ul>
              </div>
         }
-  
+    <div class="lijst-one-index">
+        <ul>
+            <li><a href="~/Account/Login">Inloggen</a></li>
+            <li><a href="~/Home/Subscribe">Abonneer</a></li>
+        </ul>
+    </div>
 </div>

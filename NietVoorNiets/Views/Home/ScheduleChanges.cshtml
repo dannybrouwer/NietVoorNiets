@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "ScheduleChanges";
+}
+
+<h2>Rooster wijzigingen</h2>
+
+@*@foreach (var change in ViewBag.Changes)
+{
+    <div>
+        <ul>
+            <li>@change["Pushnotification"]</li>
+        </ul>
+    </div>
+}*@
+
+@foreach (var change in ViewBag.Changes)
+{
+    <div>
+            <p>@change["Pushnotification"]</p>
+    </div>
+}

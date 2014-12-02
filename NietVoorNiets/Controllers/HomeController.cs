@@ -22,6 +22,15 @@ namespace NietVoorNiets.Controllers
             return View();
         }
 
+        public async Task<ActionResult> IndexDocent()
+        {
+            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+            var klassen = await query.FindAsync();
+            ViewBag.Message = klassen;
+            return View();
+        }
+
         [HttpPost]
         public async Task<ActionResult> createUser(string firstName, string email, string password)
         {
@@ -37,6 +46,27 @@ namespace NietVoorNiets.Controllers
         }
         public ActionResult createUser()
         {
+            return View();
+        }
+        public async Task<ActionResult> ScheduleChanges()
+        {
+            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
+
+            string KlasName = Request.QueryString["id"];
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Push").WhereEqualTo("Klasnaam", KlasName);
+            var changes = await query.FindAsync();
+
+            ViewBag.Changes = changes;
+            return View();
+        }
+
+        
+        public async Task<ActionResult> Subscribe()
+        {
+            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+            var klassen = await query.FindAsync();
+            ViewBag.Message = klassen;
             return View();
         }
     }
