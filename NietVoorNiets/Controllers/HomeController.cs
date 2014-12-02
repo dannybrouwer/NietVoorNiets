@@ -48,11 +48,11 @@ namespace NietVoorNiets.Controllers
         {
             return View();
         }
-        public async Task<ActionResult> ScheduleChanges()
+        public async Task<ActionResult> ScheduleChanges(string id)
         {
             ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
 
-            string KlasName = Request.QueryString["id"];
+            string KlasName = id;
             ParseQuery<ParseObject> query = ParseObject.GetQuery("Push").WhereEqualTo("Klasnaam", KlasName);
             var changes = await query.FindAsync();
 

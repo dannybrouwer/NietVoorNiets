@@ -13,8 +13,8 @@
    
     <div class="lijst-one">
         <ul>
-            <li><a href="~/Account/Create">Voeg nieuwe klas toe</a></li>
-            <li><a href="~/home/index">Terug</a></li>
+            <li><a href="@Url.Action("Create", "Account")">Voeg nieuwe klas toe</a></li>
+            <li><a href="@Url.Action("Index", "Home")">Terug</a></li>
         </ul>
         <br />
     </div>
@@ -28,7 +28,7 @@
         <div class="lijst">
 
             <ul>
-                <li><a href="../../Account/EditClassname?klasName=@id">@klas["Klasnaam"]</a></li>
+                <li><a href="@Url.Action("EditClassname", "Account", new { klasName = id })">@klas["Klasnaam"]</a></li>
             </ul>
         </div>
    
