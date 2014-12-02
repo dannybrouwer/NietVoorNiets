@@ -93,6 +93,19 @@ namespace NietVoorNiets.Controllers
             pushObject["Klasnaam"] = klasnaam;
             await pushObject.SaveAsync();
 
+
+            //Ophalen van alle e-mail adressen
+            ParseQuery<ParseObject> queryemail = ParseObject.GetQuery("Subscribers");
+            var emailadressen = await queryemail.FindAsync();
+            ParseObject emails = new ParseObject("Email");
+            ArrayList listOfEmails = new ArrayList();
+
+            foreach (var obj in emailadressen)
+            {
+                listOfEmails.Add(obj["Email"].ToString());
+            }
+
+
             //MAIL VERZENDEN
             MailMessage mail = new MailMessage("dannybrouwertest@hotmail.com", "dannybrouwertest@mailinator.com");
             SmtpClient client = new SmtpClient();
@@ -102,7 +115,18 @@ namespace NietVoorNiets.Controllers
             client.Host = "localhost";
             mail.Subject = "this is a test email.";
             mail.Body = "this is my test email body";
-            client.Send(mail);
+            
+            for (int i = 0; i < listOfEmails.Count; i++) {
+
+                mail.To.Add( listOfEmails[i].ToString() );
+
+            }
+
+
+                //mail.To.Add(listOfEmails);
+                client.Send(mail);
+
+            ViewBag.Emails = emailadressen;
 
             return RedirectToAction("Push", "Account");
         }
