@@ -1,81 +1,120 @@
-﻿body {
-    font-family: 'Miramonte';
-    background-color: #D9F5FF;
-      font-size: 20px;
-      color: white;
-      text-decoration:none; 
-}
-.logo{
-    margin-left: 500px;
+﻿*{
+    margin: 0px;
+    padding: 0px;
 }
 
-.frame-index-docent{
-   width: auto;
-   height: auto;
-   background-color:lightblue;
-   border-radius: 5px;
-    
+body{
+    width: 700px;
+    margin: auto;
 }
 
 h1{
-    color: #349383;
-    margin-left:auto;
-    margin-right:auto;    
-    text-align:center;
+    text-align: center;
+    font-family: Arial;
+    color: #4FB08F;
 }
 
-.menu-index-docent{
- 
-  border-radius: 5px; 
-  width:500px;
-  margin-left:auto;
-  margin-right: auto;
+.logo{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
-
-
-.menu-index-docent,ul, li{
-    display: inline; 
-    font-size: 20px;
-    
-    
-    
-}
-
-.menu-index-docent ul li a{
-   margin-left: 20px;
-    background-color:#349383;   
-     
-     border-radius: 5px; 
-     padding: 10px;
-     box-shadow:5px 5px gray;     
-}
-.menu-index-docent a:hover{
-   text-align:center;
-  
-   color: black;
-   box-shadow:8px 8px gray;
-}
-
-.class-list-index-docent {
-    background-color:#8BCB97; 
-    text-align: center; 
-      
-        
-}
-a{
-    color: white;    
-    text-decoration:none;
-}
-
-a:hover{
-    color:black;
+li.index-klassen{
+    background-color: #8ECD99;
+    width: 200px;
+    height: 50px;
+    font-size: 20pt;
     text-decoration: none;
-}
-.index-docent-beforeach{
-    margin-top: 50px;   
-    
+    text-align: center;
+    color: white;
 }
 
+li.navigatie-item{
+    width: 200px;
+    height: 50px;
+    background-color: lightblue;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: white solid 5px;
+    display: inline-block;
+}
 
+ul.index-klassen-box{
+    border: white solid 5px;
+    width: 200px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
+ul.index-navigatie-box{
+    text-align: center;
+}
+
+a.index-klassen-tekst{
+    color: white;
+    text-decoration:none;
+    font-size: 20pt;
+    line-height:50px;
+}
+a.navigatie-item-tekst{
+    color: white;
+    text-decoration: none;
+    font-size: 20pt;
+    line-height:50px;
+}
+
+label.label-inloggen{
+    font-size: 20pt;
+    font-family: Arial;
+    width: 200px;
+}
+
+p.inlog-box{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+}
+
+input.input-inloggen{
+    float:right;
+    width: 180px;
+    height: 25px;
+}
+
+div.geheel-formulier{
+    width: 400px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input.inlog-knop{
+    width: 70px;
+    height: 30px;
+    font-size: 15px;
+}
+
+input.abonneer-knop{
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    float: right;
+    margin-top: 10px;
+}
+
+select.selecteer-klassen{
+    float:right;
+    width: 184px;
+    height: 30px;
+}
+
+div.header-abonneer{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Century Gothic';
+}

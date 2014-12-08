@@ -12,19 +12,27 @@
     }
 </script>
 
-<h2>Aanmelden</h2>
-<p>Als je je aanmeld, krijg je de wijzigingen ook via de mail. Mooi he?! Speciaal voor jullie iPhone-gebruikers</p>
+<div class="header-abonneer">
+    <h1>Abonneren</h1>
+    <p>Als je je aanmeld, krijg je de wijzigingen ook via de mail. Mooi he?! Speciaal voor jullie iPhone-gebruikers</p>
+</div>
 
-<form method="post">
-    <p><label >E-mail</label><input id="emailID" type="text" name="emailadres" /></p>
-    <p>
-        <label>Klas</label>
-        <select name="klasnaam" id="klas">
-            @foreach (var klas in ViewBag.Message)
-            {
-                <option value="@klas["Klasnaam"]">@klas["Klasnaam"]</option>
-            }
-        </select>
-    </p>
-    <input type="submit" value="Aanmelden" onclick="Abonneer()" />
-</form>
+<div class="geheel-formulier">
+    
+    <form method="post">
+        <p>
+            <label class="label-inloggen">E-mail</label>
+            <input class="input-inloggen" id="emailID" type="text" name="emailadres" />
+        </p>
+        <p>
+            <label class="label-inloggen">Klas</label>
+            <select class="selecteer-klassen"name="klasnaam" id="klas">
+                @foreach (var klas in ViewBag.Message)
+                {
+                    <option value="@klas["Klasnaam"]">@klas["Klasnaam"]</option>
+                }
+            </select>
+        </p>
+        <input class="abonneer-knop" type="submit" value="Aanmelden" onclick="Abonneer()" />
+    </form>
+</div>
