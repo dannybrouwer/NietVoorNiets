@@ -1,7 +1,8 @@
-﻿<div class="form">
-    <h1 class="message">Klassen</h1>
+﻿<div class="frame-index-docent">
+   
 
-    <div class="lijst-one-index">
+    <div class="menu-index-docent">
+        <h1>Klassen</h1>
         <ul>
             <li><a href="@Url.Action("Edit", "Account")">Bewerken</a></li>
             <li><a href="@Url.Action("Push", "Account")">Maak een bericht</a></li>
@@ -9,15 +10,17 @@
         </ul>
         <br />
     </div>
+    
+    <div class="index-docent-beforeach">
+        @foreach (var klas in ViewBag.Message)
+        {
 
-    @foreach (var klas in ViewBag.Message)
-    {
-
-        <div class="lijst">
-            <ul>
-                <li><a href="@Url.Action("ScheduleChanges", "Home", new { id = klas["Klasnaam"] })">@klas["Klasnaam"]</a></li>
-            </ul>
-        </div>
-    }
+            <div class="class-list-index-docent">
+                <ul>
+                    <li><a href="@Url.Action("ScheduleChanges", "Home", new { id = klas["Klasnaam"] })">@klas["Klasnaam"]</a></li>
+                </ul>
+            </div>
+        }
+    </div>
 
 </div>
