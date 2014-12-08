@@ -2,11 +2,13 @@
     function Abonneer() {
         // NOT WORKING YET
         var email = document.getElementById('emailID').value;
+        var klas = document.getElementById('klas').value;
 
         Parse.initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "225C2xK4PLFjcBx86zyHxEsgAYFaLRAsfrXy7V1j");
         var Subscribe = Parse.Object.extend("Subscribers");
         var subscribe = new Subscribe();
         subscribe.save({ Email: email });
+        subscribe.save({ SubscribedClass: klas });
     }
 </script>
 
@@ -17,10 +19,10 @@
     <p><label >E-mail</label><input id="emailID" type="text" name="emailadres" /></p>
     <p>
         <label>Klas</label>
-        <select name="klasnaam" >
+        <select name="klasnaam" id="klas">
             @foreach (var klas in ViewBag.Message)
             {
-                <option id="klas" value="@klas["Klasnaam"]">@klas["Klasnaam"]</option>
+                <option value="@klas["Klasnaam"]">@klas["Klasnaam"]</option>
             }
         </select>
     </p>
