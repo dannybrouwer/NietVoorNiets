@@ -26,14 +26,13 @@ namespace NietVoorNiets.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(string username, string password)
         {
-            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
             try
             {
                 await ParseUser.LogInAsync(username, password);
 
                 login = true;
                 Session["loggedin"] = login.ToString();
-                return RedirectToAction("IndexDocent","Home");
+                return RedirectToAction("IndexDocent","Account");
                 // Login was successful.
             }
             catch (Exception e)
@@ -48,10 +47,9 @@ namespace NietVoorNiets.Controllers
         {
             if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
             {
-                    ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
                     ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
                     var klassen = await query.FindAsync();
-                    return View();
+                    return RedirectToAction("IndexDocent", "Home");
             }
             return RedirectToAction("IndexDocent", "Home");
         }
@@ -86,16 +84,13 @@ namespace NietVoorNiets.Controllers
                 }
             }
 
-            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
-
             ParseObject pushObject = new ParseObject("Push");
             pushObject["Pushnotification"] = message;
             pushObject["Klasnaam"] = klasnaam;
             await pushObject.SaveAsync();
 
-
             //Ophalen van alle e-mail adressen
-            ParseQuery<ParseObject> queryemail = ParseObject.GetQuery("Subscribers");
+            ParseQuery<ParseObject> queryemail = ParseObject.GetQuery("Subscribers").WhereEqualTo("SubscribedClass", klasnaam); ;
             var emailadressen = await queryemail.FindAsync();
             ParseObject emails = new ParseObject("Email");
             ArrayList listOfEmails = new ArrayList();
@@ -104,7 +99,6 @@ namespace NietVoorNiets.Controllers
             {
                 listOfEmails.Add(obj["Email"].ToString());
             }
-
 
             //MAIL VERZENDEN
             MailMessage mail = new MailMessage("dannybrouwertest@hotmail.com", "dannybrouwertest@mailinator.com");
@@ -117,14 +111,10 @@ namespace NietVoorNiets.Controllers
             mail.Body = "this is my test email body";
             
             for (int i = 0; i < listOfEmails.Count; i++) {
-
                 mail.To.Add( listOfEmails[i].ToString() );
-
             }
 
-
-                //mail.To.Add(listOfEmails);
-                client.Send(mail);
+            client.Send(mail);
 
             ViewBag.Emails = emailadressen;
 
@@ -134,7 +124,6 @@ namespace NietVoorNiets.Controllers
         {
             if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
             {
-                ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
                 ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
                 var klassen = await query.FindAsync();
                 ViewBag.Message = klassen;
@@ -145,7 +134,6 @@ namespace NietVoorNiets.Controllers
 
         public async Task<ActionResult> Edit()
         {
-            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
             ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
             
             var klassen = await query.FindAsync();
@@ -183,7 +171,6 @@ namespace NietVoorNiets.Controllers
                 return View(viewModel);
             }
 
-            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
             var query = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", klasName);
             ParseObject klas = await query.FirstAsync();
 
@@ -196,12 +183,22 @@ namespace NietVoorNiets.Controllers
         [HttpPost]
         public async Task<ActionResult> Delete(string klasName)
         {
-            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
             var query = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", klasName);
             ParseObject klas = await query.FirstAsync();
             await klas.DeleteAsync();
 
             return RedirectToAction("Edit");
+        }
+        public async Task<ActionResult> IndexDocent()
+        {
+            if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
+            {
+                ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+                var klassen = await query.FindAsync();
+                ViewBag.Message = klassen;
+                return View();
+            }
+            return RedirectToAction("Login", "Account");
         }
     }
 }

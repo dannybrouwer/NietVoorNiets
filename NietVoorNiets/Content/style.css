@@ -30,6 +30,7 @@ li.index-klassen {
     text-align: center;
     color: white;
     display: inline-block;
+    margin-top: 10px;
 }
 
 li.navigatie-item {
@@ -49,6 +50,7 @@ ul.index-klassen-box {
     height: 50px;
     margin-left: auto;
     margin-right: auto;
+    display: inline;
 }
 
 ul.index-navigatie-box {
@@ -148,4 +150,9 @@ textarea.area-inloggen {
     float: right;
     max-height: 100px;
     max-width: 232px;
+}
+
+
+div.klassen-box{
+    text-align:center;
 }

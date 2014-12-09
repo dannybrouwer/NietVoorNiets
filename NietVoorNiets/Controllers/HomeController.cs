@@ -22,15 +22,6 @@ namespace NietVoorNiets.Controllers
             return View();
         }
 
-        public async Task<ActionResult> IndexDocent()
-        {
-            ParseClient.Initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "J8W5RChPP6N22Ah25Q1krRvTPobl4wPP2rs0BFFa");
-            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
-            var klassen = await query.FindAsync();
-            ViewBag.Message = klassen;
-            return View();
-        }
-
         [HttpPost]
         public async Task<ActionResult> createUser(string firstName, string email, string password)
         {
