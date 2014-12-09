@@ -6,6 +6,8 @@
 body {
     width: 700px;
     margin: auto;
+    font-size: 12pt;
+    font-family: 'Century Gothic';
 }
 
 
@@ -68,6 +70,7 @@ a.index-klassen-tekst {
     font-size: 13pt;
     line-height: 50px;
     font-family: 'Century Gothic';
+    
 }
 
 a.navigatie-item-tekst {
@@ -76,6 +79,7 @@ a.navigatie-item-tekst {
     font-size: 12pt;
     line-height: 50px;
     font-family: 'Century Gothic';
+
 }
 
 label.label-inloggen {
@@ -149,3 +153,18 @@ textarea.area-inloggen {
     max-height: 100px;
     max-width: 232px;
 }
+
+.tabel-klassen{
+    
+    border-radius: 5px;
+    margin-left:auto;
+    margin-right: auto;
+    width: 600px;
+}
+
+td {
+    background-color:lightblue;
+}
+
+
+
