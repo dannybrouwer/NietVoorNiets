@@ -1,4 +1,11 @@
 ﻿<h1>Klassen</h1>
+<div class="navigatie">
+    <ul class="index-navigatie-box">
+        <li class="navigatie-item"><a class="navigatie-item-tekst" href="@Url.Action("Login", "Account")">Inloggen</a></li>
+        <li class="navigatie-item"><a class="navigatie-item-tekst" href="@Url.Action("Subscribe", "Home")">Abonneer</a></li>
+    </ul>
+</div>
+
 
 @foreach (var klas in ViewBag.Message)
 {
@@ -7,9 +14,3 @@
     </ul>
 }
 
-<div class="navigatie">
-    <ul class="index-navigatie-box">
-        <li class="navigatie-item"><a class="navigatie-item-tekst" href="@Url.Action("Login", "Account")">Inloggen</a></li>
-        <li class="navigatie-item"><a class="navigatie-item-tekst" href="@Url.Action("Subscribe", "Home")">Abonneer</a></li>
-    </ul>
-</div>

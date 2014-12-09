@@ -22,10 +22,10 @@
     
             @foreach (var change in ViewBag.Changes)
             {
-                <tr> 
+                <tr > 
                             
-                    <td width="100px" style="background-color: #8BCB97">@change.CreatedAt</td>
-                    <td colspan="3">@change["Pushnotification"]</td>                    
+                    <td width="100px" style="background-color: #8BCB97; padding:10px; ">@change.CreatedAt</td>
+                    <td style="padding:10px;" colspan="3">@change["Pushnotification"]</td>                    
                 </tr>
             }
        
