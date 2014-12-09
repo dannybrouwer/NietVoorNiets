@@ -1,37 +1,38 @@
-﻿*{
+﻿* {
     margin: 0px;
     padding: 0px;
 }
 
-body{
+body {
     width: 700px;
     margin: auto;
 }
 
-h1{
+h1 {
     text-align: center;
     font-family: Arial;
     color: #4FB08F;
 }
 
-.logo{
+.logo {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
 
-li.index-klassen{
-    background-color: #8ECD99;
+li.index-klassen {
+    background-color: rgb(79, 176, 143);
     width: 200px;
     height: 50px;
     font-size: 20pt;
     text-decoration: none;
     text-align: center;
     color: white;
+    display: inline-block;
 }
 
-li.navigatie-item{
-    width: 200px;
+li.navigatie-item {
+    width: 166px;
     height: 50px;
     background-color: lightblue;
     margin-left: auto;
@@ -41,7 +42,7 @@ li.navigatie-item{
     display: inline-block;
 }
 
-ul.index-klassen-box{
+ul.index-klassen-box {
     border: white solid 5px;
     width: 200px;
     height: 50px;
@@ -49,56 +50,60 @@ ul.index-klassen-box{
     margin-right: auto;
 }
 
-ul.index-navigatie-box{
+ul.index-navigatie-box {
     text-align: center;
 }
 
-a.index-klassen-tekst{
-    color: white;
-    text-decoration:none;
-    font-size: 20pt;
-    line-height:50px;
-}
-a.navigatie-item-tekst{
+a.index-klassen-tekst {
     color: white;
     text-decoration: none;
-    font-size: 20pt;
-    line-height:50px;
+    font-size: 13pt;
+    line-height: 50px;
+    font-family: 'Century Gothic';
 }
 
-label.label-inloggen{
+a.navigatie-item-tekst {
+    color: white;
+    text-decoration: none;
+    font-size: 12pt;
+    line-height: 50px;
+    font-family: 'Century Gothic';
+}
+
+label.label-inloggen {
+    color: rgb(79, 176, 143);
     font-size: 20pt;
-    font-family: Arial;
+    font-family: 'Century Gothic';
     width: 200px;
 }
 
-p.inlog-box{
+p.inlog-box {
     width: 400px;
     margin-left: auto;
     margin-right: auto;
     color: black;
 }
 
-input.input-inloggen{
-    float:right;
+input.input-inloggen {
+    float: right;
     width: 180px;
     height: 25px;
 }
 
-div.geheel-formulier{
+div.geheel-formulier {
     width: 400px;
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
 }
 
-input.inlog-knop{
-    width: 70px;
-    height: 30px;
+input.inlog-knop {
+    width: 95px;
+    height: 34px;
     font-size: 15px;
 }
 
-input.abonneer-knop{
+input.abonneer-knop {
     width: 100px;
     height: 30px;
     font-size: 15px;
@@ -106,15 +111,33 @@ input.abonneer-knop{
     margin-top: 10px;
 }
 
-select.selecteer-klassen{
-    float:right;
+select.selecteer-klassen {
+    float: right;
     width: 184px;
     height: 30px;
 }
 
-div.header-abonneer{
+div.header-abonneer {
     width: 400px;
     margin-left: auto;
     margin-right: auto;
     font-family: 'Century Gothic';
+}
+
+div.index-klassen-box {
+    width: 700px;
+}
+
+select.select-inloggen {
+    width: 234px;
+    height: 30px;
+    float: right;
+}
+
+textarea.area-inloggen {
+    width: 232px;
+    height: 100px;
+    float: right;
+    max-height: 100px;
+    max-width: 232px;
 }

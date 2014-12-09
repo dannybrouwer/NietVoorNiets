@@ -1,26 +1,16 @@
-﻿<div class="frame-index-docent">
-   
+﻿<h1>Klassen</h1>
 
-    <div class="menu-index-docent">
-        <h1>Klassen</h1>
-        <ul>
-            <li><a href="@Url.Action("Edit", "Account")">Bewerken</a></li>
-            <li><a href="@Url.Action("Push", "Account")">Maak een bericht</a></li>
-            <li><a href="#">Afmelden</a></li>
+<div class="klassen-box">
+    @foreach (var klas in ViewBag.Message)
+    {
+        <ul class="index-klassen-box">
+            <li class="index-klassen"><a class="navigatie-item-tekst" href="@Url.Action("ScheduleChanges", "Home", new { id = klas["Klasnaam"] })">@klas["Klasnaam"]</a></li>
         </ul>
-        <br />
-    </div>
-    
-    <div class="index-docent-beforeach">
-        @foreach (var klas in ViewBag.Message)
-        {
-
-            <div class="class-list-index-docent">
-                <ul>
-                    <li><a href="@Url.Action("ScheduleChanges", "Home", new { id = klas["Klasnaam"] })">@klas["Klasnaam"]</a></li>
-                </ul>
-            </div>
-        }
-    </div>
-
+    }
 </div>
+
+<ul class="index-navigatie-box">
+    <li class="navigatie-item" style="background-color: #349383"><a class="navigatie-item-tekst" href="@Url.Action("Edit", "Account")">Bewerken</a></li>
+    <li class="navigatie-item" style="background-color: #4FB08F"><a class="navigatie-item-tekst" href="@Url.Action("Push", "Account")">Bericht maken</a></liclass>
+    <li class="navigatie-item" style="background-color: #8ECD99"><a class="navigatie-item-tekst" href="#">Afmelden</a></li>
+</ul>

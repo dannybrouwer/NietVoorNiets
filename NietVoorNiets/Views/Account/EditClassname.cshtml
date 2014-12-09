@@ -3,16 +3,23 @@
     ViewBag.Title = "EditClassname";
 }
 
-<div class="form">
-    <h2 class="message">Klas bewerken</h2>
+<h1>Klas bewerken</h1>
+<div class="geheel-formulier">
     <form method="post">
-        <label>Klas</label>
-        @Html.TextBoxFor(m => m.Name, new { placeholder = ViewBag.KlasName })
-        <input type="submit" value="Opslaan" class="pure-button pure-button-primary" style="float:right" />
-    </form>
-    <form method="post" action="@Url.Action("Delete")">
-        <input type="hidden" class="pure-button pure-button-primary" value="@ViewBag.KlasName" name="klasName" />        
-        <input type="submit" value="Verwijderen" class="pure-button pure-button-primary" style="float:left" />
-    </form>
-    <a href="@Url.Action("Edit")"><input type="submit" value="Terug" class="pure-button pure-button-primary" style="margin-left:25px" /></a>
+        <p class="inlog-box">
+            <label class="label-inloggen">Klas</label>
+            @Html.TextBoxFor(m => m.Name, new { placeholder = ViewBag.KlasName, @class="input-inloggen" })
+        </p>
+        <div style="float:right;">
+            <input class="inlog-knop" type="submit" value="Opslaan" />
+            <input class="inlog-knop" type="submit" value="Verwijderen" />
+            <a href="@Url.Action("Edit")"><input class="inlog-knop" type="submit" value="Terug" /></a>
+        </div>
+</form>
 </div>
+
+<form method="post" action="@Url.Action("Delete")">
+    <input type="hidden" value="@ViewBag.KlasName" name="klasName" />
+</form>
+    
+        

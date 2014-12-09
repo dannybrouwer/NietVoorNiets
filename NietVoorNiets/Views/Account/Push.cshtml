@@ -2,28 +2,28 @@
     ViewBag.Title = "Push";
 }
 
-<div class="form">
-    <h1 class="message">Verstuur een notificatie</h1>
-
+<h1 class="message">Verstuur een notificatie</h1>
+<div class="geheel-formulier">
     <form method="post">
-        
-        
-            <label>Klas</label>
-       
-        <select name="klasnaam">
-            @foreach (var klas in ViewBag.Message)
-            {
-                <option id="klas" value="@klas["Klasnaam"]">@klas["Klasnaam"]</option>
-            }
-        </select>
+        <p class="inlog-box">
+            <label class="label-inloggen">Klas</label>
+            <select class="select-inloggen" name="klasnaam">
+                @foreach (var klas in ViewBag.Message)
+                {
+                    <option id="klas" value="@klas["Klasnaam"]">@klas["Klasnaam"]</option>
+                }
+            </select>
+        </p>
+        <p class="inlog-box">
+            <label class="label-inloggen">Bericht</label>
+            <textarea class="area-inloggen" id="message" placeholder="Voer hier uw bericht in" name="message"></textarea>
+        </p>
 
-       <br />
-        <label>Bericht</label>
-        <textarea id="message" placeholder="Voer hier uw bericht in" name="message"></textarea><br />
-        <input type="submit" class="pure-button pure-button-primary" style="float:right" value="Verstuur" />
+        <div style="float:right; clear: both;">
+            <p style="margin-top: 10px;">
+                <input class="inlog-knop" type="submit" value="Verstuur" />
+                <a href="@Url.Action("Index", "Home")"><input class="inlog-knop" type="submit" value="Terug" /></a>
+            </p>
+        </div>
     </form>
-    <a href="@Url.Action("Index", "Home")"><input type="submit" value="Terug" class="pure-button pure-button-primary" style="margin-left:25px" /></a>
 </div>
-
-
-

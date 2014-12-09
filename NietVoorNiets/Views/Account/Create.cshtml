@@ -13,12 +13,17 @@
     }
 </script>
 
-<div class="form">
-    <h2 class="message">Klas toevoegen</h2>
+<h1>Klas toevoegen</h1>
+<div class="geheel-formulier">
     <form method="post">
-        <label>Klas</label>
-        <input type="text" id="klasId" placeholder="Klas naam" name="KlasNaam" /><br />
-        <input type="submit" value="Toevoegen" onclick="nieuweKlas()" class="pure-button pure-button-primary" style="float:right"/>
-      </form>
-    <a href="@Url.Action("Edit")"><input type="submit" value="Terug" class="pure-button pure-button-primary" style="float:left" /></a>
+        <p class="inlog-box">
+            <label class="label-inloggen">Klas</label>
+            <input class="input-inloggen" type="text" id="klasId" placeholder="Klas naam" name="KlasNaam" />
+        </p>
+
+        <div style="float:right;">
+            <input class="inlog-knop" type="submit" value="Toevoegen" onclick="nieuweKlas()" />
+            <a href="@Url.Action("IndexDocent", "Home")"><input class="inlog-knop" type="submit" value="Terug"></a>
+        </div>
+    </form>
 </div>
