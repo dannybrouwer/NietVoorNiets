@@ -49,7 +49,7 @@ namespace NietVoorNiets.Controllers
             {
                     ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
                     var klassen = await query.FindAsync();
-                    return RedirectToAction("IndexDocent", "Home");
+                    return View();
             }
             return RedirectToAction("IndexDocent", "Home");
         }
