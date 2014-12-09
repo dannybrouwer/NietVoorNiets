@@ -8,6 +8,7 @@ body {
     margin: auto;
 }
 
+
 h1 {
     text-align: center;
     font-family: Arial;
@@ -52,6 +53,13 @@ ul.index-klassen-box {
 
 ul.index-navigatie-box {
     text-align: center;
+}
+
+a:hover.index-klassen-tekst{
+    color: black;
+}
+a:hover.navigatie-item-tekst{
+    color: black;
 }
 
 a.index-klassen-tekst {
