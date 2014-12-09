@@ -6,18 +6,20 @@
 
 <h1>Kies een klas om te bewerken</h1>
 
-@foreach (var klas in ViewBag.Message)
-{
-    String id = listOfKlassNames[amountOfNames].ToString();
-    <ul class="index-klassen-box">
-        <li class="index-klassen"><a class="index-klassen-tekst" href="@Url.Action("EditClassname", "Account", new { klasName = id })">@klas["Klasnaam"]</a></li>
-    </ul>
-    amountOfNames++;
-}
-
 <div class="navigatie">
     <ul class="index-navigatie-box">
         <li class="navigatie-item"><a class="navigatie-item-tekst" href="@Url.Action("Create", "Account")">Klas toevoegen</a></li>
-        <li class="navigatie-item"><a class="navigatie-item-tekst" href="@Url.Action("IndexDocent", "Home")">Terug</a></li>
+        <li class="navigatie-item"><a class="navigatie-item-tekst" href="@Url.Action("IndexDocent", "Account")">Terug</a></li>
     </ul>
+</div>
+
+<div class="klassen-box">
+    @foreach (var klas in ViewBag.Message)
+    {
+        String id = listOfKlassNames[amountOfNames].ToString();
+        <ul class="index-klassen-box">
+            <li class="index-klassen"><a class="index-klassen-tekst" href="@Url.Action("EditClassname", "Account", new { klasName = id })">@klas["Klasnaam"]</a></li>
+        </ul>
+        amountOfNames++;
+    }
 </div>

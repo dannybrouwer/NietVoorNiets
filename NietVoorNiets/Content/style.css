@@ -32,6 +32,7 @@ li.index-klassen {
     text-align: center;
     color: white;
     display: inline-block;
+    margin-top: 10px;
 }
 
 li.navigatie-item {
@@ -51,6 +52,7 @@ ul.index-klassen-box {
     height: 50px;
     margin-left: auto;
     margin-right: auto;
+    display: inline;
 }
 
 ul.index-navigatie-box {
@@ -154,6 +156,7 @@ textarea.area-inloggen {
     max-width: 232px;
 }
 
+<<<<<<< HEAD
 .tabel-klassen{
     
     border-radius: 5px;
@@ -168,3 +171,9 @@ td {
 
 
 
+=======
+
+div.klassen-box{
+    text-align:center;
+}
+>>>>>>> 9fe6b7e903b913c1da4a7e7a681909a02497d378
