@@ -12,15 +12,10 @@
         </p>
         <div style="float:right;">
             <input class="inlog-knop" type="submit" value="Opslaan" />
-            <a href="@Url.Action("IndexDocent", "Account")"><input class="inlog-knop" type="button" value="Terug" /></a>
+            <input class="inlog-knop" type="submit" value="Verwijderen" />
+            <a href="@Url.Action("Edit")"><input class="inlog-knop" type="submit" value="Terug" /></a>
         </div>
-    </form>
-    <form method="post" action="@Url.Action("Delete")">
-       
-        <input type="hidden" class="pure-button pure-button-primary" value="@ViewBag.KlasName" name="klasName" />
-        <input class="inlog-knop" type="submit" value="Verwijderen" style="float:right; margin-right:4px;" />
-    </form>
-    
+</form>
 </div>
 
 <form method="post" action="@Url.Action("Delete")">
