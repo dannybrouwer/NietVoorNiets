@@ -1,18 +1,4 @@
-﻿<script type="text/javascript">
-    function Abonneer() {
-        // NOT WORKING YET
-        var email = document.getElementById('emailID').value;
-        var klas = document.getElementById('klas').value;
-
-        Parse.initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "225C2xK4PLFjcBx86zyHxEsgAYFaLRAsfrXy7V1j");
-        var Subscribe = Parse.Object.extend("Subscribers");
-        var subscribe = new Subscribe();
-        subscribe.save({ Email: email });
-        subscribe.save({ SubscribedClass: klas });
-    }
-</script>
-
-<div class="header-abonneer">
+﻿<div class="header-abonneer">
     <h1>Abonneren</h1>
     <p>Als je je aanmeld, krijg je de wijzigingen ook via de mail.</p>
 </div>
@@ -22,17 +8,20 @@
     <form method="post">
         <p>
             <label class="label-inloggen">E-mail</label>
-            <input class="input-inloggen" id="emailID" type="text" name="emailadres" />
+            <input class="input-inloggen" type="text" name="emailadres" required />
         </p>
         <p>
             <label class="label-inloggen">Klas</label>
-            <select class="selecteer-klassen"name="klasnaam" id="klas">
+            <select class="selecteer-klassen" name="klasnaam" required>
                 @foreach (var klas in ViewBag.Message)
                 {
                     <option value="@klas["Klasnaam"]">@klas["Klasnaam"]</option>
                 }
             </select>
         </p>
-        <input class="abonneer-knop" type="submit" value="Aanmelden" onclick="Abonneer()" />
+        <p>
+            <input class="abonneer-knop" type="submit" value="Aanmelden"/>
+            <a href="@Url.Action("Index", "Home")"><input class="abonneer-knop" style="float:right; margin-right:4px;" type="button" value="Terug"></a>
+        </p>
     </form>
 </div>

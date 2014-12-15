@@ -55,6 +55,18 @@ namespace NietVoorNiets.Controllers
         }
 
         [HttpPost]
+        public async Task<ActionResult> Create(string KlasNaam)
+        {
+            if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
+            {
+                ParseObject pushObject = new ParseObject("Klas");
+                pushObject["Klasnaam"] = KlasNaam;
+                await pushObject.SaveAsync();
+            }
+            return RedirectToAction("IndexDocent", "Account");
+        }
+
+        [HttpPost]
         public async Task<ActionResult>Push(string message, string klasnaam)
         {
             bool isPushMessageSend = false;
@@ -107,8 +119,8 @@ namespace NietVoorNiets.Controllers
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
             client.Host = "localhost";
-            mail.Subject = "this is a test email.";
-            mail.Body = "this is my test email body";
+            mail.Subject = "Rooster wijziging";
+            mail.Body = message.ToString();
             
             for (int i = 0; i < listOfEmails.Count; i++) {
                 mail.To.Add( listOfEmails[i].ToString() );
@@ -164,31 +176,33 @@ namespace NietVoorNiets.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditClassname(ClassViewModel viewModel, string klasName)
+        public async Task<ActionResult> EditClassname(ClassViewModel viewModel, string klasName, string verwijderen)
         {
             if (!ModelState.IsValid)
             {
+                if (verwijderen != null)
+                {
+
+                    var query = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", klasName);
+                    ParseObject klas = await query.FirstAsync();
+                    await klas.DeleteAsync();
+
+                    return RedirectToAction("Edit");
+
+                }
                 return View(viewModel);
             }
+            else {
+                var query = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", klasName);
+                ParseObject klas = await query.FirstAsync();
 
-            var query = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", klasName);
-            ParseObject klas = await query.FirstAsync();
+                klas["Klasnaam"] = viewModel.Name;
+                await klas.SaveAsync();
 
-            klas["Klasnaam"] = viewModel.Name;
-            await klas.SaveAsync();
-
-            return RedirectToAction("Edit");
+                return RedirectToAction("Edit");
+            }
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Delete(string klasName)
-        {
-            var query = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", klasName);
-            ParseObject klas = await query.FirstAsync();
-            await klas.DeleteAsync();
-
-            return RedirectToAction("Edit");
-        }
         public async Task<ActionResult> IndexDocent()
         {
             if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))

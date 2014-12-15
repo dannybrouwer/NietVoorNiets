@@ -2,17 +2,6 @@
     ViewBag.Title = "Contact";
 }
 
-<script type="text/javascript">
-    function nieuweKlas() {
-        var Name = document.getElementById('klasId').value;
-
-        Parse.initialize("QGr7SiC0ROlcAJsSmB4ryzFgviGcNYMPz7JlCvCa", "225C2xK4PLFjcBx86zyHxEsgAYFaLRAsfrXy7V1j");
-        var Klas = Parse.Object.extend("Klas");
-        var klas = new Klas();
-        klas.save({ Klasnaam: Name });
-    }
-</script>
-
 <h1>Klas toevoegen</h1>
 <div class="geheel-formulier">
     <form method="post">

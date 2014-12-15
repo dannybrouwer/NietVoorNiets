@@ -2,15 +2,16 @@
 <div class="navigatie">
     <ul class="index-navigatie-box">
         <li class="navigatie-item"><a class="navigatie-item-tekst" href="@Url.Action("Login", "Account")">Inloggen</a></li>
-        <li class="navigatie-item"><a class="navigatie-item-tekst" href="@Url.Action("Subscribe", "Home")">Abonneer</a></li>
+        <li class="navigatie-item"><a class="navigatie-item-tekst" href="@Url.Action("Subscribe", "Home")">Abonneren</a></li>
     </ul>
 </div>
 
-
-@foreach (var klas in ViewBag.Message)
-{
-    <ul class="index-klassen-box">
-        <li class="index-klassen"><a class="index-klassen-tekst" href="@Url.Action("ScheduleChanges", "Home", new { id = klas["Klasnaam"]})">@klas["Klasnaam"]</a></li>
-    </ul>
-}
+<div class="klassen-box">
+    @foreach (var klas in ViewBag.Message)
+    {
+        <ul class="index-klassen-box">
+            <li class="index-klassen"><a class="index-klassen-tekst" href="@Url.Action("ScheduleChanges", "Home", new { id = klas["Klasnaam"]})">@klas["Klasnaam"]</a></li>
+        </ul>
+    }
+</div>
 
