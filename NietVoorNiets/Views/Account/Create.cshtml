@@ -7,11 +7,11 @@
     <form method="post">
         <p class="inlog-box">
             <label class="label-inloggen">Klas</label>
-            <input class="input-inloggen" type="text" id="klasId" placeholder="Klas naam" name="KlasNaam" />
+            <input class="input-inloggen" type="text" id="klasId" placeholder="Klas naam" name="KlasNaam" required/>
         </p>
 
         <div style="float:right;">
-            <input class="inlog-knop" type="submit" value="Toevoegen" onclick="nieuweKlas()" />
+            <input class="inlog-knop" type="submit" value="Toevoegen"/>
             <a href="@Url.Action("IndexDocent", "Account")"><input class="inlog-knop" type="button" value="Terug"></a>
         </div>
     </form>
