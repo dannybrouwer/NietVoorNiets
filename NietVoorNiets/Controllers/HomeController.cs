@@ -44,8 +44,21 @@ namespace NietVoorNiets.Controllers
             ParseQuery<ParseObject> query = ParseObject.GetQuery("Push").WhereEqualTo("Klasnaam", KlasName);
             var changes = await query.FindAsync();
 
+            int amountOfChanges = 0;
+
+            foreach (var change in changes) {
+                amountOfChanges++;
+            }
+
+            if (amountOfChanges == 0)
+            {
+                string noChangesMessage = "Er zijn geen berichten";
+                ViewBag.NoChanges = noChangesMessage;
+            }
+
             ViewBag.Klas = KlasName;
             ViewBag.Changes = changes;
+
             return View();
         }
 
