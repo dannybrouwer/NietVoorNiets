@@ -180,10 +180,10 @@ namespace NietVoorNiets.Controllers
             }
         }
 
-        public void SignOut()
+        public ActionResult SignOut()
         {
             Session["loggedin"] = false;
-            RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<ActionResult> IndexDocent()
