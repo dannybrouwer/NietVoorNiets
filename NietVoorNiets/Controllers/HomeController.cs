@@ -16,15 +16,15 @@ namespace NietVoorNiets.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
-            var klassen = await query.FindAsync();
-            ViewBag.Message = klassen;
-
             if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
             {
                 return RedirectToAction("IndexDocent", "Account");
             }
-            else
+
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+            var klassen = await query.FindAsync();
+            ViewBag.Message = klassen;
+
             return View();
         }
 

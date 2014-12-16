@@ -30,8 +30,11 @@ namespace NietVoorNiets.Controllers
             {
                 await ParseUser.LogInAsync(username, password);
 
-                login = true;
-                Session["loggedin"] = login.ToString();
+                var cookie = new HttpCookie("userName");
+                cookie.Value = username;
+                cookie.Expires = DateTime.Now.AddHours(1);
+                Response.Cookies.Set(cookie);
+
                 return RedirectToAction("IndexDocent","Account");
                 // Login was successful.
             }
@@ -182,21 +185,26 @@ namespace NietVoorNiets.Controllers
 
         public ActionResult SignOut()
         {
-            Session["loggedin"] = false;
+            var cookie = Request.Cookies["userName"];
+
+            if (cookie != null)
+            {
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Set(cookie);
+            }
+
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles = "teacher")]
         public async Task<ActionResult> IndexDocent()
         {
-            if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
-            {
-                ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
-                var klassen = await query.FindAsync();
-                ViewBag.Message = klassen;
-                return View();
-            }
-            
-            return RedirectToAction("Login", "Account");
+
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+            var klassen = await query.FindAsync();
+            ViewBag.Message = klassen;
+            return View();
+
         }
     }
 }
