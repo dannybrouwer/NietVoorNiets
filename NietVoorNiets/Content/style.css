@@ -1,4 +1,5 @@
 ﻿* {
+    color: rgb(79, 176, 143);
     margin: 0px;
     padding: 0px;
 }
@@ -36,6 +37,7 @@ li.index-klassen {
 }
 
 li.navigatie-item {
+    margin-top: 29px;
     width: 166px;
     height: 50px;
     background-color: #47AED8;
@@ -59,10 +61,11 @@ ul.index-navigatie-box {
     text-align: center;
 }
 
-a:hover.index-klassen-tekst{
+a:hover.index-klassen-tekst {
     color: black;
 }
-a:hover.navigatie-item-tekst{
+
+a:hover.navigatie-item-tekst {
     color: black;
 }
 
@@ -72,7 +75,6 @@ a.index-klassen-tekst {
     font-size: 13pt;
     line-height: 50px;
     font-family: 'Century Gothic';
-    
 }
 
 a.navigatie-item-tekst {
@@ -81,7 +83,6 @@ a.navigatie-item-tekst {
     font-size: 12pt;
     line-height: 50px;
     font-family: 'Century Gothic';
-
 }
 
 label.label-inloggen {
@@ -158,13 +159,13 @@ textarea.area-inloggen {
 
 
 .tabel-klassen {
+    padding-top: 30px;
     border-radius: 5px;
     margin-left: auto;
     margin-right: auto;
     width: 600px;
 }
 
-div.klassen-box{
-    text-align:center;
+div.klassen-box {
+    text-align: center;
 }
-

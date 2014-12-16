@@ -96,9 +96,12 @@ namespace NietVoorNiets.Controllers
                 }
             }
 
+            ParseQuery<ParseObject> queryKlas = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", klasnaam); ;
+            ParseObject Klas = await queryKlas.FirstAsync();
+            ParseObject klas = new ParseObject("Klas");
             ParseObject pushObject = new ParseObject("Push");
             pushObject["Pushnotification"] = message;
-            pushObject["Klasnaam"] = klasnaam;
+            pushObject["KlasId"] = Klas.ObjectId;
             await pushObject.SaveAsync();
 
             //Ophalen van alle e-mail adressen
@@ -144,31 +147,6 @@ namespace NietVoorNiets.Controllers
             return RedirectToAction("Login");
         }
 
-        public async Task<ActionResult> Edit()
-        {
-            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
-            
-            var klassen = await query.FindAsync();
-
-            ArrayList ListOfClassIds = new ArrayList();
-            ArrayList ListOfClassNames = new ArrayList();
-
-            foreach (var klas in klassen)
-            {
-                ParseObject currentKlas = klas;
-                String CurrentObjectId = currentKlas.ObjectId;
-                String CurrentKlasName = currentKlas.Get<string>("Klasnaam"); ;
-
-                ListOfClassIds.Add(CurrentObjectId);
-                ListOfClassNames.Add(CurrentKlasName);
-
-                ViewBag.KlasName = ListOfClassNames;
-                ViewBag.KlasId = ListOfClassIds;
-            }
-
-            ViewBag.Message = klassen;
-            return View();
-        }
         public ActionResult EditClassname(string klasName)
         {
             ViewBag.KlasName = klasName;
@@ -188,7 +166,6 @@ namespace NietVoorNiets.Controllers
                     await klas.DeleteAsync();
 
                     return RedirectToAction("Edit");
-
                 }
                 return View(viewModel);
             }
@@ -203,6 +180,12 @@ namespace NietVoorNiets.Controllers
             }
         }
 
+        public void SignOut()
+        {
+            Session["loggedin"] = false;
+            RedirectToAction("Index", "Home");
+        }
+
         public async Task<ActionResult> IndexDocent()
         {
             if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
@@ -212,6 +195,7 @@ namespace NietVoorNiets.Controllers
                 ViewBag.Message = klassen;
                 return View();
             }
+            
             return RedirectToAction("Login", "Account");
         }
     }

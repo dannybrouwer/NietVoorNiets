@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Parse;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,6 +19,12 @@ namespace NietVoorNiets.Controllers
             ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
             var klassen = await query.FindAsync();
             ViewBag.Message = klassen;
+
+            if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
+            {
+                return RedirectToAction("IndexDocent", "Account");
+            }
+            else
             return View();
         }
 
@@ -40,8 +47,10 @@ namespace NietVoorNiets.Controllers
         }
         public async Task<ActionResult> ScheduleChanges(string id)
         {
-            string KlasName = id;
-            ParseQuery<ParseObject> query = ParseObject.GetQuery("Push").WhereEqualTo("Klasnaam", KlasName);
+            string KlasNaam = id;
+
+
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Push").WhereEqualTo("Klasnaam", KlasNaam);
             var changes = await query.FindAsync();
 
             int amountOfChanges = 0;
@@ -55,9 +64,37 @@ namespace NietVoorNiets.Controllers
                 string noChangesMessage = "Er zijn geen berichten";
                 ViewBag.NoChanges = noChangesMessage;
             }
-
-            ViewBag.Klas = KlasName;
+                        
+            ViewBag.Klas = KlasNaam;
             ViewBag.Changes = changes;
+
+
+
+
+
+
+
+            ParseQuery<ParseObject> query2 = ParseObject.GetQuery("Klas");
+
+            var klassen = await query2.FindAsync();
+
+            ArrayList ListOfClassIds = new ArrayList();
+            ArrayList ListOfClassNames = new ArrayList();
+
+            foreach (var klas in klassen)
+            {
+                ParseObject currentKlas = klas;
+                String CurrentObjectId = currentKlas.ObjectId;
+                String CurrentKlasName = currentKlas.Get<string>("Klasnaam"); ;
+
+                ListOfClassIds.Add(CurrentObjectId);
+                ListOfClassNames.Add(CurrentKlasName);
+
+                ViewBag.KlasName = ListOfClassNames;
+                ViewBag.KlasId = ListOfClassIds;
+            }
+
+            ViewBag.Message = klassen;
 
             return View();
         }
