@@ -143,6 +143,7 @@
     <Content Include="Views\Group\Create.cshtml" />
     <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Views\Group\TeacherIndex.cshtml" />
+    <Content Include="Views\Group\Unsubscribe.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

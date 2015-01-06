@@ -11,9 +11,9 @@
             @Html.TextBoxFor(m => m.Name, new { placeholder = ViewBag.KlasName, @class="input-inloggen" })
         </p>
         <div style="float:right;">
-            <input class="inlog-knop" type="submit" value="Opslaan" />
-            <input class="inlog-knop" type="submit" value="Verwijderen" name="verwijderen" />
-            <a href="@Url.Action("IndexDocent")"><input class="inlog-knop" type="button" value="Terug" /></a>
+            <input style="color: rgb(79, 176, 143);" class="inlog-knop" type="submit" value="Opslaan" />
+            <input style="color: rgb(79, 176, 143);"  class="inlog-knop" type="submit" value="Verwijderen" name="verwijderen" />
+            <a href="@Url.Action("IndexDocent")"><input style="color: rgb(79, 176, 143);" class="inlog-knop" type="button" value="Terug" /></a>
         </div>
 </form>
 </div>
@@ -21,5 +21,3 @@
 <form method="post" action="@Url.Action("Delete")">
     <input type="hidden" value="@ViewBag.KlasName" name="klasName" />
 </form>
-    
-        
