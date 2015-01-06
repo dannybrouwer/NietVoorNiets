@@ -16,15 +16,16 @@ namespace NietVoorNiets.Controllers
     {
         public async Task<ActionResult> Index()
         {
+
+            var cookie = Request.Cookies["userName"];
+            if (cookie != null)
+            {
+                return RedirectToAction("IndexDocent", "Account");
+            }
             ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
             var klassen = await query.FindAsync();
             ViewBag.Message = klassen;
 
-            if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
-            {
-                return RedirectToAction("IndexDocent", "Account");
-            }
-            else
             return View();
         }
 
@@ -67,12 +68,6 @@ namespace NietVoorNiets.Controllers
                         
             ViewBag.Klas = KlasNaam;
             ViewBag.Changes = changes;
-
-
-
-
-
-
 
             ParseQuery<ParseObject> query2 = ParseObject.GetQuery("Klas");
 

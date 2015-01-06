@@ -7,9 +7,16 @@
 </head>
 <body>
     <div class="logo">
+        @if (User.IsInRole("teacher"))
+        {
+            <a href="@Url.Action("IndexDocent", "Account")"><img src="~/content/images/logo-davinci-college.png" class="logo"></a>
+        }
+        else { 
         <a href="@Url.Action("Index", "Home")"><img src="~/content/images/logo-davinci-college.png" class="logo"></a>
+        }
     </div>
     @RenderBody()
 
 </body>
+
 </html>

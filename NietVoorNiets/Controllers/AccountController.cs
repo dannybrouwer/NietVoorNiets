@@ -30,9 +30,11 @@ namespace NietVoorNiets.Controllers
             {
                 await ParseUser.LogInAsync(username, password);
 
-                login = true;
-                Session["loggedin"] = login.ToString();
-                return RedirectToAction("IndexDocent","Account");
+                var cookie = new HttpCookie("userName");
+                cookie.Value = username;
+                cookie.Expires = DateTime.Now.AddHours(1);
+                Response.Cookies.Set(cookie);
+                return RedirectToAction("IndexDocent", "Account");
                 // Login was successful.
             }
             catch (Exception e)
@@ -42,27 +44,23 @@ namespace NietVoorNiets.Controllers
                 // The login failed
             }
         }
-        
+
+        [Authorize(Roles = "teacher")]
         public async Task<ActionResult> Create()
         {
-            if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
-            {
-                    ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
-                    var klassen = await query.FindAsync();
-                    return View();
-            }
-            return RedirectToAction("IndexDocent", "Home");
+
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+            var klassen = await query.FindAsync();
+            return View();
         }
 
+        [Authorize(Roles = "teacher")]
         [HttpPost]
         public async Task<ActionResult> Create(string KlasNaam)
         {
-            if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
-            {
-                ParseObject pushObject = new ParseObject("Klas");
-                pushObject["Klasnaam"] = KlasNaam;
-                await pushObject.SaveAsync();
-            }
+            ParseObject pushObject = new ParseObject("Klas");
+            pushObject["Klasnaam"] = KlasNaam;
+            await pushObject.SaveAsync();
             return RedirectToAction("IndexDocent", "Account");
         }
 
@@ -102,6 +100,7 @@ namespace NietVoorNiets.Controllers
             ParseObject pushObject = new ParseObject("Push");
             pushObject["Pushnotification"] = message;
             pushObject["KlasId"] = Klas.ObjectId;
+            pushObject["Klasnaam"] = klasnaam;
             await pushObject.SaveAsync();
 
             //Ophalen van alle e-mail adressen
@@ -135,22 +134,24 @@ namespace NietVoorNiets.Controllers
 
             return RedirectToAction("Push", "Account");
         }
+
+        [Authorize(Roles = "teacher")]
         public async Task<ActionResult> Push()
         {
-            if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
-            {
-                ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
-                var klassen = await query.FindAsync();
-                ViewBag.Message = klassen;
-                return View();
-            }
-            return RedirectToAction("Login");
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+            var klassen = await query.FindAsync();
+            ViewBag.Message = klassen;
+            return View();
         }
 
         public ActionResult EditClassname(string klasName)
         {
-            ViewBag.KlasName = klasName;
-            return View();
+             var cookie = Request.Cookies["userName"];
+             if (cookie == null)
+             {
+                ViewBag.KlasName = klasName;
+                return RedirectToAction("Login", "Account");
+             } return View();
         }
 
         [HttpPost]
@@ -160,12 +161,11 @@ namespace NietVoorNiets.Controllers
             {
                 if (verwijderen != null)
                 {
-
                     var query = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", klasName);
                     ParseObject klas = await query.FirstAsync();
                     await klas.DeleteAsync();
 
-                    return RedirectToAction("Edit");
+                    return RedirectToAction("IndexDocent", "Account");
                 }
                 return View(viewModel);
             }
@@ -176,27 +176,30 @@ namespace NietVoorNiets.Controllers
                 klas["Klasnaam"] = viewModel.Name;
                 await klas.SaveAsync();
 
-                return RedirectToAction("Edit");
+                return RedirectToAction("IndexDocent", "Account");
             }
         }
 
         public ActionResult SignOut()
         {
-            Session["loggedin"] = false;
+            var cookie = Request.Cookies["userName"];
+            if (cookie != null)
+            {
+                cookie.Expires = DateTime.Now.AddHours(-1);
+                Response.Cookies.Set(cookie);
+            }
             return RedirectToAction("Index", "Home");
         }
 
+
+        [Authorize(Roles= "teacher")]
         public async Task<ActionResult> IndexDocent()
         {
-            if (Session["loggedin"] != null && (Session["loggedin"].ToString() == "True"))
-            {
-                ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
-                var klassen = await query.FindAsync();
-                ViewBag.Message = klassen;
-                return View();
-            }
-            
-            return RedirectToAction("Login", "Account");
+
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+            var klassen = await query.FindAsync();
+            ViewBag.Message = klassen;
+            return View();
         }
     }
 }
