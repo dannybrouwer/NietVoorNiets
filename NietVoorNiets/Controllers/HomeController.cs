@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -51,7 +52,7 @@ namespace NietVoorNiets.Controllers
             string KlasNaam = id;
 
 
-            ParseQuery<ParseObject> query = ParseObject.GetQuery("Push").WhereEqualTo("Klasnaam", KlasNaam);
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Push").WhereEqualTo("Klasnaam", KlasNaam).OrderBy("createdAt");
             var changes = await query.FindAsync();
 
             int amountOfChanges = 0;
@@ -110,6 +111,21 @@ namespace NietVoorNiets.Controllers
             pushObject["Email"] = emailadres;
             pushObject["SubscribedClass"] = klasnaam;
             await pushObject.SaveAsync();
+
+
+
+            MailMessage mail = new MailMessage("dannybrouwertest@hotmail.com", "dannybrouwertest@mailinator.com");
+            SmtpClient client = new SmtpClient();
+            client.Port = 25;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Host = "localhost";
+            mail.Subject = "Aangemeld op klas "+ klasnaam +".";
+            mail.Body = "Test Body :D aangemeld !! :D";
+            mail.To.Add(emailadres);
+            client.Send(mail);
+
+
 
             return RedirectToAction("Index", "Home");
         }

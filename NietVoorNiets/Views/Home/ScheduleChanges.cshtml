@@ -4,11 +4,13 @@
     int amountOfNames = 0;
     string id = listOfKlassNames[amountOfNames].ToString();
 
-    for (int i = 0; i < listOfKlassNames.Count; i++) {
+    for (int i = 0; i < listOfKlassNames.Count; i++)
+    {
 
         String currentClass = listOfKlassNames[i].ToString();
-        
-        if (currentClass == ViewBag.Klas){
+
+        if (currentClass == ViewBag.Klas)
+        {
             id = currentClass;
         }
     }
@@ -16,7 +18,14 @@
 
 <div>
     <h1 class="message-title">Rooster wijzigingen</h1>
-    <a href="@Url.Action("EditClassname", "Account", new { klasName = id })"><h2 style="text-align:center;">@ViewBag.Klas</h2></a>
+    @if (User.IsInRole("teacher"))
+    {
+        <a href="@Url.Action("EditClassname", "Account", new { klasName = id })"><h2 style="text-align:center;">@ViewBag.Klas</h2></a>
+    }
+    else
+    {
+        <h2 style="text-align:center;">@ViewBag.Klas</h2>
+    }
 
     <table cellpadding="10" class="tabel-klassen">
         <thead>
@@ -48,9 +57,12 @@
     <div style="width:650px;">
         <ul>
             <li class="navigatie-item" style="background-color: #47AED8; float:right;"><a class="navigatie-item-tekst" href="@Url.Action("Index", "Home")">Terug</a></li>
-            <li class="navigatie-item" style="background-color: #47AED8; float:right;"><a class="navigatie-item-tekst" href="@Url.Action("Create", "Account")">Klas toevoegen</a></li>
-            <li class="navigatie-item" style="background-color: #47AED8; float:right;"><a class="navigatie-item-tekst" href="@Url.Action("Push", "Account")">Bericht verzenden</a></li>
+            @if (User.IsInRole("teacher"))
+            {
+                <li class="navigatie-item" style="background-color: #47AED8; float:right;"><a class="navigatie-item-tekst" href="@Url.Action("Create", "Account")">Klas toevoegen</a></li>
+                <li class="navigatie-item" style="background-color: #47AED8; float:right;"><a class="navigatie-item-tekst" href="@Url.Action("Push", "Account", new { id })">Bericht verzenden</a></li>
+            }
         </ul>
     </div>
-     
+
 </div>

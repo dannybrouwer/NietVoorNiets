@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Parse;
 using System.Web.UI;
+using System.Net.Mail;
 
 namespace NietVoorNiets
 {
@@ -51,6 +52,23 @@ namespace NietVoorNiets
                 var query = ParseObject.GetQuery("Subscribers").WhereEqualTo("Email", emailadres);
                 ParseObject email = await query.FirstAsync();
                 await email.DeleteAsync();
+
+
+                MailMessage mail = new MailMessage("dannybrouwertest@hotmail.com", "dannybrouwertest@mailinator.com");
+                SmtpClient client = new SmtpClient();
+                client.Port = 25;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Host = "localhost";
+                mail.Subject = "Abonnement opgezegd";
+                mail.Body = "Test Body :D Abonnement opgezegd !! :D";
+                mail.To.Add(emailadres);
+                client.Send(mail);
+
+
+
+
+
                 return RedirectToAction("Index");
             }
             catch 

@@ -144,6 +144,7 @@
     <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Views\Group\TeacherIndex.cshtml" />
     <Content Include="Views\Group\Unsubscribe.cshtml" />
+    <Content Include="Views\Account\MultiPush.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

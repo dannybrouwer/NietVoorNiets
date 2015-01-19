@@ -64,14 +64,25 @@ namespace NietVoorNiets.Controllers
             return RedirectToAction("IndexDocent", "Account");
         }
 
+        [Authorize(Roles = "teacher")]
+        public async Task<ActionResult> Push(string id)
+        {
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+            var klassen = await query.FindAsync();
+            ViewBag.Message = klassen;
+            ViewBag.ID = id;
+            return View();
+        }
+
         [HttpPost]
         public async Task<ActionResult>Push(string message, string klasnaam)
         {
             bool isPushMessageSend = false;
             string postString = "";
+
             string urlpath = "https://api.parse.com/1/push";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(urlpath);
-            postString = "{ \"channels\": [ \"class_" + klasnaam + "\"  ], " +
+            postString = "{ \"channels\": [ \"class_" + klasnaam + "\"  ] " +
                              "\"data\" : {\"alert\":\"" + message + "\"}" +
                              "}";
             httpWebRequest.ContentType = "application/json";
@@ -128,20 +139,11 @@ namespace NietVoorNiets.Controllers
                 mail.To.Add( listOfEmails[i].ToString() );
             }
 
-            client.Send(mail);
+            //client.Send(mail);
 
             ViewBag.Emails = emailadressen;
 
             return RedirectToAction("Push", "Account");
-        }
-
-        [Authorize(Roles = "teacher")]
-        public async Task<ActionResult> Push()
-        {
-            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
-            var klassen = await query.FindAsync();
-            ViewBag.Message = klassen;
-            return View();
         }
 
         public ActionResult EditClassname(string klasName)
@@ -149,9 +151,14 @@ namespace NietVoorNiets.Controllers
              var cookie = Request.Cookies["userName"];
              if (cookie == null)
              {
-                ViewBag.KlasName = klasName;
-                return RedirectToAction("Login", "Account");
-             } return View();
+                 ViewBag.KlasName = klasName;
+                 return RedirectToAction("Login", "Account");
+             }
+             else
+             {
+                 ViewBag.KlasName = klasName;
+             }
+                 return View();
         }
 
         [HttpPost]
@@ -196,6 +203,14 @@ namespace NietVoorNiets.Controllers
         public async Task<ActionResult> IndexDocent()
         {
 
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+            var klassen = await query.FindAsync();
+            ViewBag.Message = klassen;
+            return View();
+        }
+
+        public async Task<ActionResult> MultiPush()
+        {
             ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
             var klassen = await query.FindAsync();
             ViewBag.Message = klassen;

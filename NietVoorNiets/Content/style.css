@@ -169,3 +169,16 @@ textarea.area-inloggen {
 div.klassen-box {
     text-align: center;
 }
+
+
+div.multiple-groups{
+    width: 60px;
+    padding-left: 166px;
+}
+
+input.multiple-groups{
+    color: rgb(79, 176, 143);
+    font-size: 20pt;
+    font-family: 'Century Gothic';
+    width: 50px;
+}

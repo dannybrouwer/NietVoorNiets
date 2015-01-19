@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Push";
+    ViewBag.Title = "MultiPush";
 }
 
 <h1 class="message">Verstuur een notificatie</h1>
@@ -7,7 +7,12 @@
     <form method="post">
         <p class="inlog-box">
             <label class="label-inloggen">Klas</label>
-            <input id="klas" name="klasnaam" type="text" value="@ViewBag.ID" class="input-inloggen" readonly />
+            <div class="multiple-group">
+                @foreach (var klas in ViewBag.Message)
+                {
+                    <input type="checkbox" id="klas" value="@klas["Klasnaam"]" /> @klas["Klasnaam"]
+                }
+            </div>
         </p>
         <p class="inlog-box">
             <label class="label-inloggen">Bericht</label>
