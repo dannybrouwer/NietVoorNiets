@@ -38,7 +38,6 @@ namespace NietVoorNiets
             return RedirectToAction("Index");
         }
 
-
         public ActionResult Unsubscribe()
         {
             return View();
@@ -53,7 +52,6 @@ namespace NietVoorNiets
                 ParseObject email = await query.FirstAsync();
                 await email.DeleteAsync();
 
-
                 MailMessage mail = new MailMessage("dannybrouwertest@hotmail.com", "dannybrouwertest@mailinator.com");
                 SmtpClient client = new SmtpClient();
                 client.Port = 25;
@@ -61,13 +59,9 @@ namespace NietVoorNiets
                 client.UseDefaultCredentials = false;
                 client.Host = "localhost";
                 mail.Subject = "Abonnement opgezegd";
-                mail.Body = "Test Body :D Abonnement opgezegd !! :D";
+                mail.Body = "Uw abonnement is opgezegd.";
                 mail.To.Add(emailadres);
                 client.Send(mail);
-
-
-
-
 
                 return RedirectToAction("Index");
             }

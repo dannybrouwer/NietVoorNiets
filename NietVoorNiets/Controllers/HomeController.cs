@@ -50,9 +50,7 @@ namespace NietVoorNiets.Controllers
         public async Task<ActionResult> ScheduleChanges(string id)
         {
             string KlasNaam = id;
-
-
-            ParseQuery<ParseObject> query = ParseObject.GetQuery("Push").WhereEqualTo("Klasnaam", KlasNaam).OrderBy("createdAt");
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Push").WhereEqualTo("Klasnaam", KlasNaam).OrderByDescending("createdAt");
             var changes = await query.FindAsync();
 
             int amountOfChanges = 0;
@@ -121,7 +119,7 @@ namespace NietVoorNiets.Controllers
             client.UseDefaultCredentials = false;
             client.Host = "localhost";
             mail.Subject = "Aangemeld op klas "+ klasnaam +".";
-            mail.Body = "Test Body :D aangemeld !! :D";
+            mail.Body = "U heeft zich geabonneerd op " + klasnaam + ". Vanaf nu ontvangt u een mail zodra er een wijziging plaats vindt.";
             mail.To.Add(emailadres);
             client.Send(mail);
 

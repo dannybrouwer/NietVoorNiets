@@ -10,7 +10,7 @@
             <div class="multiple-group">
                 @foreach (var klas in ViewBag.Message)
                 {
-                    <input type="checkbox" id="klas" value="@klas["Klasnaam"]" /> @klas["Klasnaam"]
+                    <input type="checkbox" id="klas" name="klasnaam" value="@klas["Klasnaam"]" /> @klas["Klasnaam"]
                 }
             </div>
         </p>
