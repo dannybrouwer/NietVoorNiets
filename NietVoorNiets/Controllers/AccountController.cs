@@ -140,7 +140,7 @@ namespace NietVoorNiets.Controllers
 
             //client.Send(mail);
             ViewBag.Emails = emailadressen;
-            return RedirectToAction("Push", "Account");
+            return RedirectToAction("IndexDocent", "Account");
         }
 
         public ActionResult EditClassname(string klasName)
@@ -281,7 +281,7 @@ namespace NietVoorNiets.Controllers
             //client.Send(mail);
             ViewBag.Emails = emailadressen;
             }
-            return RedirectToAction("MultiPush", "Account");
+            return RedirectToAction("IndexDocent", "Account");
         }
 
         public async Task<ActionResult> MultiPush()
