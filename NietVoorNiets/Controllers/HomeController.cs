@@ -110,20 +110,10 @@ namespace NietVoorNiets.Controllers
             pushObject["SubscribedClass"] = klasnaam;
             await pushObject.SaveAsync();
 
-
-
-            MailMessage mail = new MailMessage("dannybrouwertest@hotmail.com", "dannybrouwertest@mailinator.com");
-            SmtpClient client = new SmtpClient();
-            client.Port = 25;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Host = "localhost";
-            mail.Subject = "Aangemeld op klas "+ klasnaam +".";
-            mail.Body = "U heeft zich geabonneerd op " + klasnaam + ". Vanaf nu ontvangt u een mail zodra er een wijziging plaats vindt.";
-            mail.To.Add(emailadres);
-            client.Send(mail);
-
-
+            var mailMan = new MailMan();
+            string subject = "Aangemeld op klas " + klasnaam + ".";
+            string body = "U heeft zich geabonneerd op " + klasnaam + ". Vanaf nu ontvangt u een mail zodra er een wijziging plaats vindt.";
+            mailMan.Send(subject, body, emailadres);
 
             return RedirectToAction("Index", "Home");
         }

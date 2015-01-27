@@ -4,7 +4,7 @@ using Parse;
 using System.Web.UI;
 using System.Net.Mail;
 
-namespace NietVoorNiets
+namespace NietVoorNiets.Controllers
 {
     public class GroupController : Controller
     {
@@ -52,16 +52,10 @@ namespace NietVoorNiets
                 ParseObject email = await query.FirstAsync();
                 await email.DeleteAsync();
 
-                MailMessage mail = new MailMessage("dannybrouwertest@hotmail.com", "dannybrouwertest@mailinator.com");
-                SmtpClient client = new SmtpClient();
-                client.Port = 25;
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.UseDefaultCredentials = false;
-                client.Host = "localhost";
-                mail.Subject = "Abonnement opgezegd";
-                mail.Body = "Uw abonnement is opgezegd.";
-                mail.To.Add(emailadres);
-                client.Send(mail);
+                var mailMan = new MailMan();
+                string subject = "Abonnement opgezegd";
+                string body = "Uw abonnement is opgezegd.";
+                mailMan.Send(subject, body, emailadres);
 
                 return RedirectToAction("Index");
             }
