@@ -67,21 +67,27 @@ namespace NietVoorNiets.Controllers
         [Authorize(Roles = "teacher")]
         public async Task<ActionResult> Push(string id)
         {
-            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", id);
+
+            ParseObject klassenObject = await query.FirstAsync();
+            ViewBag.GroupID = klassenObject.ObjectId.ToString();
+
+
             var klassen = await query.FindAsync();
             ViewBag.Message = klassen;
             ViewBag.ID = id;
+            
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult>Push(string message, string klasnaam)
+        public async Task<ActionResult> Push(string message, string klasnaam, string GroupId)
         {
             bool isPushMessageSend = false;
             string postString = "";
             string urlpath = "https://api.parse.com/1/push";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(urlpath);
-            postString = "{ \"channels\": [ \"class_" + klasnaam + "\"  ], " +
+            postString = "{ \"channels\": [ \"class_" + GroupId + "\"  ], " +
                              "\"data\" : {\"alert\":\"" + message + "\"}" +
                              "}";
             httpWebRequest.ContentType = "application/json";
