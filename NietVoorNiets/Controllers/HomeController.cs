@@ -50,14 +50,7 @@ namespace NietVoorNiets.Controllers
         public async Task<ActionResult> ScheduleChanges(string id)
         {
             string KlasNaam = id;
-
-            ParseQuery<ParseObject> GroupQuery = ParseObject.GetQuery("Klas").WhereEqualTo("Klasnaam", id);
-            ParseObject Groups = await GroupQuery.FirstAsync();
-
-            string GroupID = Groups.ObjectId.ToString();
-
-
-            ParseQuery<ParseObject> query = ParseObject.GetQuery("Push").WhereEqualTo("KlasId", GroupID).OrderByDescending("createdAt");
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Push").WhereEqualTo("Klasnaam", KlasNaam).OrderByDescending("createdAt");
             var changes = await query.FindAsync();
 
             int amountOfChanges = 0;
@@ -117,20 +110,10 @@ namespace NietVoorNiets.Controllers
             pushObject["SubscribedClass"] = klasnaam;
             await pushObject.SaveAsync();
 
-
-
-            MailMessage mail = new MailMessage("dannybrouwertest@hotmail.com", "dannybrouwertest@mailinator.com");
-            SmtpClient client = new SmtpClient();
-            client.Port = 25;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Host = "localhost";
-            mail.Subject = "Davinci abonnementl";
-            mail.Body = "U heeft zich geabonneerd op " + klasnaam + ". Vanaf nu ontvangt u een mail zodra er een wijziging plaats vindt.";
-            mail.To.Add(emailadres);
-            client.Send(mail);
-
-
+            var mailMan = new MailMan();
+            string subject = "Aangemeld op klas " + klasnaam + ".";
+            string body = "U heeft zich geabonneerd op " + klasnaam + ". Vanaf nu ontvangt u een mail zodra er een wijziging plaats vindt.";
+            mailMan.Send(subject, body, emailadres);
 
             return RedirectToAction("Index", "Home");
         }

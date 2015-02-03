@@ -137,7 +137,7 @@ namespace NietVoorNiets.Controllers
             ParseQuery<ParseObject> queryemail = ParseObject.GetQuery("Subscribers").WhereEqualTo("SubscribedClass", klasnaam); ;
             var emailadressen = await queryemail.FindAsync();
             ParseObject emails = new ParseObject("Email");
-            ArrayList listOfEmails = new ArrayList();
+            List<string> listOfEmails = new List<string>();
 
             foreach (var obj in emailadressen)
             {
@@ -145,6 +145,9 @@ namespace NietVoorNiets.Controllers
             }
 
             //MAIL VERZENDEN
+            var mailMan = new MailMan();
+            mailMan.Send("Roosterwijziging", message, listOfEmails);
+
             MailMessage mail = new MailMessage("dannybrouwertest@hotmail.com", "dannybrouwertest@mailinator.com");
             SmtpClient client = new SmtpClient();
             client.Port = 25;
@@ -152,7 +155,7 @@ namespace NietVoorNiets.Controllers
             client.UseDefaultCredentials = false;
             client.Host = "localhost";
             mail.Subject = "Rooster wijziging";
-            mail.Body = message.ToString();
+            mail.Body = message;
             
             for (int i = 0; i < listOfEmails.Count; i++) {
                 mail.To.Add( listOfEmails[i].ToString() );
