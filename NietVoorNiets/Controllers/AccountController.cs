@@ -58,6 +58,20 @@ namespace NietVoorNiets.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(string KlasNaam)
         {
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("Klas");
+            var klassen = await query.FindAsync();
+
+
+            foreach (var klas in klassen) {
+
+               string currentKlassname = klas["Klasnaam"].ToString();
+               if (currentKlassname == KlasNaam ) {
+                   ViewBag.SameName = "Deze naam bestaat al.";
+                   return View();
+               }
+            }
+
+
             ParseObject pushObject = new ParseObject("Klas");
             pushObject["Klasnaam"] = KlasNaam;
             await pushObject.SaveAsync();
